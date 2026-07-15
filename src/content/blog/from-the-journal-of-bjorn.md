@@ -1,12 +1,12 @@
 ---
-title: "From the Journal of Bjorn Thrain's-son"
+title: "From the Journal of Bjorn, Son of Halvor"
 description: "A dwarf-smith wrestles with roads, halls, and the measure of companions."
 date: 2026-07-10
 tags: ["journal", "bjorn", "lore"]
 draft: false
 ---
 
-<div class="journal-note">*An in-world journal entry from Bjorn Thrain's-son, one of the three protagonists of the Age of Reclamation trilogy.*</div>
+<div class="journal-note">*An in-world journal entry from Bjorn, son of Halvor, one of the three protagonists of the Age of Reclamation trilogy.*</div>
 
 ---
 

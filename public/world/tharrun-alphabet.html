@@ -1,0 +1,360 @@
+<title>The Tharrun — Dwarven Alphabet of Aerthos</title>
+<style>
+  :root{
+    --bg:#e7e3db; --panel:#efece4; --tile:#e0dacd; --edge:#cdc6b8;
+    --ink:#241f27; --ink-soft:#574f5a; --muted:#847c86;
+    --accent:#b0501a; --accent-2:#c9691f; --glow:rgba(176,80,26,.16);
+    --font-display:"Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
+    --font-body:Georgia,"Iowan Old Style","Times New Roman",serif;
+    --font-mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --maxw:1100px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#131218; --panel:#1b1a22; --tile:#232230; --edge:#37354492;
+      --ink:#e9e4da; --ink-soft:#bab4ad; --muted:#8b8593;
+      --accent:#e0782f; --accent-2:#f0a15c; --glow:rgba(224,120,47,.22);
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#e7e3db; --panel:#efece4; --tile:#e0dacd; --edge:#cdc6b8;
+    --ink:#241f27; --ink-soft:#574f5a; --muted:#847c86;
+    --accent:#b0501a; --accent-2:#c9691f; --glow:rgba(176,80,26,.16);
+  }
+  :root[data-theme="dark"]{
+    --bg:#131218; --panel:#1b1a22; --tile:#232230; --edge:#37354492;
+    --ink:#e9e4da; --ink-soft:#bab4ad; --muted:#8b8593;
+    --accent:#e0782f; --accent-2:#f0a15c; --glow:rgba(224,120,47,.22);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:var(--font-body); line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 60%);
+    background-repeat:no-repeat;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,48px)}
+  .eyebrow{
+    font-family:var(--font-mono); text-transform:uppercase;
+    letter-spacing:.32em; font-size:.7rem; color:var(--accent);
+  }
+  h1,h2,h3{font-family:var(--font-display); font-weight:600; text-wrap:balance; line-height:1.1}
+
+  /* ---------- hero ---------- */
+  header{padding:clamp(52px,9vw,104px) 0 clamp(28px,5vw,48px)}
+  .hero{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(24px,5vw,56px); align-items:center}
+  .hero-title h1{font-size:clamp(2.6rem,7vw,5rem); margin:.15em 0 .35em; letter-spacing:.01em}
+  .hero-title h1 em{font-style:italic; color:var(--accent)}
+  .hero-title p{font-size:clamp(1.05rem,2vw,1.28rem); color:var(--ink-soft); max-width:34ch; margin:0}
+  .hero-rune{
+    width:clamp(150px,26vw,240px); aspect-ratio:6/10;
+    display:grid; place-items:center; position:relative;
+    border:1px solid var(--edge); border-radius:3px;
+    background:linear-gradient(160deg,var(--panel),color-mix(in srgb,var(--panel) 70%, var(--bg)));
+    box-shadow:0 24px 60px -34px var(--accent);
+  }
+  .hero-rune::after{
+    content:"Tharr"; position:absolute; bottom:10px; left:0; right:0; text-align:center;
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.28em;
+    text-transform:uppercase; color:var(--muted);
+  }
+  .hero-rune svg{width:58%; height:58%; color:var(--accent); filter:drop-shadow(0 0 10px var(--glow))}
+
+  .meta{
+    display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:clamp(26px,4vw,40px);
+    padding-top:22px; border-top:1px solid var(--edge);
+    font-family:var(--font-mono); font-size:.78rem; color:var(--muted);
+  }
+  .meta b{color:var(--ink-soft); font-weight:600}
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(40px,6vw,72px) 0}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:clamp(22px,3vw,34px); flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(1.5rem,3vw,2.1rem); margin:0}
+  .sec-head .lede{color:var(--ink-soft); font-size:1rem; max-width:52ch}
+
+  /* ---------- alphabet grid ---------- */
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:clamp(10px,1.4vw,16px)}
+  .tile{
+    background:var(--tile); border:1px solid var(--edge); border-radius:3px;
+    padding:18px 14px 14px; display:flex; flex-direction:column; align-items:center; gap:2px;
+    position:relative; overflow:hidden;
+    transition:transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s ease, border-color .25s, box-shadow .25s;
+  }
+  .tile.reveal{opacity:0; transform:translateY(14px)}
+  .tile.holy{box-shadow:inset 0 0 0 1px var(--accent)}
+  .tile:hover{border-color:var(--accent); box-shadow:0 14px 30px -22px var(--accent)}
+  .tile:hover .rune{color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
+  .rune{width:56px; height:88px; color:var(--ink); transition:color .25s, filter .25s}
+  .tile.holy .rune{color:var(--accent)}
+  .r-name{font-family:var(--font-display); font-size:1.34rem; letter-spacing:.01em; margin-top:6px}
+  .r-letter{
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--accent); background:color-mix(in srgb,var(--accent) 12%, transparent);
+    padding:2px 8px; border-radius:2px;
+  }
+  .r-sound{font-family:var(--font-mono); font-size:.74rem; color:var(--ink-soft); margin-top:5px}
+  .r-mean{font-size:.82rem; color:var(--muted); text-align:center; line-height:1.4; margin-top:4px; text-wrap:balance}
+  .holy-tag{
+    position:absolute; top:8px; right:8px; font-family:var(--font-mono);
+    font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+  }
+
+  /* ---------- the two sacred marks ---------- */
+  .marks{display:grid; grid-template-columns:1fr; gap:clamp(14px,2vw,20px)}
+  @media (min-width:720px){.marks{grid-template-columns:1fr 1fr}}
+  .mark{
+    display:flex; gap:clamp(16px,2.4vw,24px); align-items:flex-start;
+    background:var(--tile); border:1px solid var(--edge); border-radius:3px;
+    padding:clamp(18px,2.6vw,26px); box-shadow:inset 0 0 0 1px var(--accent);
+  }
+  .mark .rune{width:60px; height:96px; flex:none; color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
+  .mark-body{display:flex; flex-direction:column; gap:2px}
+  .mark .r-name{font-family:var(--font-display); font-size:1.5rem; margin:0}
+  .mark .r-name .say{font-family:var(--font-mono); font-size:.82rem; color:var(--accent); letter-spacing:.06em}
+  .mark .r-role{
+    align-self:flex-start; margin:4px 0 8px;
+    font-family:var(--font-mono); font-size:.64rem; letter-spacing:.2em; text-transform:uppercase;
+    color:var(--accent); background:color-mix(in srgb,var(--accent) 12%, transparent);
+    padding:2px 9px; border-radius:2px;
+  }
+  .mark p{margin:0; color:var(--ink-soft); font-size:.92rem}
+  .mark p em{font-style:italic; color:var(--ink)}
+  .marks-note{
+    margin-top:clamp(18px,2.4vw,26px); color:var(--ink-soft); font-size:.98rem;
+    max-width:60ch; text-wrap:pretty;
+  }
+  .marks-note b{color:var(--ink); font-weight:600}
+
+  /* ---------- rules ---------- */
+  .split{display:grid; grid-template-columns:1fr; gap:clamp(34px,5vw,56px)}
+  @media (min-width:820px){.split{grid-template-columns:1.05fr .95fr}}
+  ol.rules{list-style:none; counter-reset:r; margin:0; padding:0; display:flex; flex-direction:column; gap:14px}
+  ol.rules li{counter-increment:r; display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:start}
+  ol.rules li::before{
+    content:counter(r,decimal-leading-zero); font-family:var(--font-mono); font-size:.82rem;
+    color:var(--accent); padding-top:.2em; min-width:2ch;
+  }
+  ol.rules b{font-family:var(--font-display); font-weight:600; font-size:1.02rem}
+  ol.rules span{color:var(--ink-soft); font-size:.96rem}
+
+  /* ---------- phrasebook ---------- */
+  .phrases{display:flex; flex-direction:column; gap:2px}
+  .phrase{padding:16px 0; border-top:1px solid var(--edge)}
+  .phrase:first-child{border-top:0}
+  .phrase .native{font-family:var(--font-display); font-size:1.28rem; color:var(--ink)}
+  .phrase .native .say{color:var(--accent)}
+  .phrase .gloss{font-family:var(--font-mono); font-size:.78rem; color:var(--muted); margin:3px 0 6px; letter-spacing:.02em}
+  .phrase .sense{color:var(--ink-soft); font-size:.96rem}
+  .coined{
+    margin-top:26px; padding:20px 22px; border-left:3px solid var(--accent);
+    background:color-mix(in srgb,var(--accent) 7%, transparent); border-radius:0 3px 3px 0;
+  }
+  .coined h3{margin:0 0 4px; font-size:1.15rem}
+  .coined h3 em{color:var(--accent); font-style:normal}
+  .coined p{margin:0 0 12px; color:var(--ink-soft); font-size:.95rem}
+  .coined p:last-child{margin-bottom:0}
+
+  footer{padding:44px 0 72px; border-top:1px solid var(--edge); color:var(--muted); font-size:.86rem}
+  footer b{color:var(--ink-soft)}
+
+  .toggle{
+    position:fixed; top:16px; right:16px; z-index:10; cursor:pointer;
+    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
+    background:var(--panel); color:var(--ink-soft); border:1px solid var(--edge);
+    border-radius:2px; padding:8px 12px;
+  }
+  .toggle:focus-visible, .tile:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+  @media (max-width:640px){
+    .hero{grid-template-columns:1fr; text-align:left}
+    .hero-rune{justify-self:start}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .tile{transition:border-color .2s, box-shadow .2s}
+    .tile.reveal{opacity:1; transform:none}
+  }
+</style>
+
+<button class="toggle" id="toggle" aria-label="Switch light/dark theme">Theme</button>
+
+<div class="wrap">
+  <header>
+    <div class="hero">
+      <div class="hero-title">
+        <span class="eyebrow">The dwarven script of Aerthos</span>
+        <h1>The <em>Tharrun</em></h1>
+        <p>The sacred cuts — twenty runes of <b>Tharrudin</b>, the tongue of Tharros the Forgefather. Each rune a channel for the mountain's deep fires.</p>
+      </div>
+      <div class="hero-rune" aria-hidden="true"><span id="heroRune"></span></div>
+    </div>
+    <div class="meta">
+      <span><b>Language</b> Tharrudin</span>
+      <span><b>Seeded from</b> Tharros, the Forgefather</span>
+      <span><b>Cut, never inked</b></span>
+      <span><b>20 runes</b> · 2 sacred marks · base-twelve reckoning</span>
+    </div>
+  </header>
+
+  <section id="alphabet">
+    <div class="sec-head">
+      <h2>The Runes</h2>
+      <p class="lede">Every rune's name is also a root word — learn the alphabet and you learn the lexicon. The anvil-mark <b>Tharr</b> comes first, and no inscription begins without it.</p>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="marks">
+    <div class="sec-head">
+      <h2>The Two Sacred Marks</h2>
+      <p class="lede">Two of the runes are not letters at all, but the Forgefather's own tools. They bracket every true inscription: the anvil opens it, the hammer seals it.</p>
+    </div>
+    <div class="marks" id="marks-grid"></div>
+    <p class="marks-note">The anvil holds, the hammer strikes, and <b>making is the space cut between them</b>. It is the theology of the forge-god carved into the punctuation of the script itself — nothing is <em>thar</em>, true-made, until struck. The hammer's holy singular is <b>Dhomm</b>, the Forgefather's own hammer, the relic the Common tongue calls the <b>Forgehammer</b>; its everyday form is the common noun <b>pelvor</b>.</p>
+  </section>
+
+  <section id="speaking">
+    <div class="split">
+      <div>
+        <div class="sec-head"><h2>How it's spoken</h2></div>
+        <ol class="rules">
+          <li><b>Every rune is sounded.</b> <span>No silent letters — dwarves distrust ornament. What is cut is said.</span></li>
+          <li><b>Pure, open vowels.</b> <span>Latin values: <em>a</em>=ah, <em>e</em>=eh, <em>i</em>=ee, <em>o</em>=oh, <em>u</em>=oo. A circumflex holds them long and reverent.</span></li>
+          <li><b>The rolled R is the spine.</b> <span>Single <em>r</em> taps; <em>rr</em> trills at double length. Doubling it lengthens reverence as much as sound — sacred words carry it.</span></li>
+          <li><b>TH softens to DH between vowels.</b> <span>θ (“thin”) at a word's start; voiced ð (“this”) when it falls between two vowels. The hammer-mark <em>Dhomm</em> keeps the soft ð — say “THOHM.”</span></li>
+          <li><b>Stress the first written vowel.</b> <span>The first vowel in a word; the first root in a compound — <em>VOR·rom</em>, <em>THAR·ru·din</em>. A ghost breath never takes it.</span></li>
+          <li><b>Clusters take a ghost vowel.</b> <span>A hard onset eases on an unwritten breath — <em>Halvor</em> → “HAL-vor,” <em>dravok</em> → “d'RA-vok.” The breath is never carved and never stressed.</span></li>
+          <li><b>Stay low.</b> <span>Spoken level and deep. A rising tone is kept for oath and invocation — to lift the voice otherwise is, to a dwarf, to lie.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="sec-head"><h2>To speak it</h2></div>
+        <div class="phrases">
+          <div class="phrase">
+            <div class="native"><span class="say">Dur ath val.</span></div>
+            <div class="gloss">stone · and · oath</div>
+            <div class="sense">The standard greeting — <em>well-met; I stand with you.</em> Answered: <b>“Val hald.”</b> — the oath holds.</div>
+          </div>
+          <div class="phrase">
+            <div class="native"><span class="say">Tharros gorn, Tharros ren.</span></div>
+            <div class="gloss">Forgefather's fire · Forgefather's ring</div>
+            <div class="sense">The forge-blessing, spoken over a finished piece — the words cut into Bjorn's axe.</div>
+          </div>
+          <div class="phrase">
+            <div class="native"><span class="say">Pelvor ath Tharr.</span></div>
+            <div class="gloss">hammer · and · anvil</div>
+            <div class="sense">A maker's oath, sworn over work begun — the two tools of the Forgefather, the strike and the thing that holds.</div>
+          </div>
+          <div class="phrase">
+            <div class="native"><span class="say">Valos thar.</span></div>
+            <div class="gloss">the oath · made sacred</div>
+            <div class="sense">The sealing line. <em>“This is the oath.”</em></div>
+          </div>
+        </div>
+        <div class="coined">
+          <h3>Words with no Common tongue</h3>
+          <p><em>tharren</em> — the resonance a rightly-made thing holds. Its opposite, <em>morren</em>, the dead-ring of a thing unmade or defiled.</p>
+          <p><em>durfenn</em> — the ache of the deep in one who is far from it. Homesickness for the mountain, felt as weight.</p>
+          <p><em>morgorn</em> — the unmaking of the made; a forge run backward, fire that unmakes instead of makes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="wrap" style="padding-left:0;padding-right:0">
+    <b>Tharrun</b> · the writing system of <b>Tharrudin</b>, the High Tongue of the dwarves of the Ironspine.
+    Common Dwarven — the vernacular of everyday names — keeps its harder <b>K</b> sounds; the High Tongue has shed them.
+    Reference draft for the Aerthos manuscripts.
+  </footer>
+</div>
+
+<script>
+const S=[[30,12],[30,88]];
+const R=[
+ {n:'Tharr', L:'TH', s:'θ · “thin”', m:'sacred · true-made', holy:1, g:[S,[[14,24],[46,24]],[[30,24],[45,42]],[[30,24],[15,42]]]},
+ {n:'Dhurr', L:'DH', s:'ð · “this”', m:'the mountain’s low hum', g:[S,[[14,34],[46,34]],[[14,66],[46,66]]]},
+ {n:'Dur', L:'D', s:'d', m:'stone · deep · enduring', g:[S,[[30,30],[47,50],[30,70]]]},
+ {n:'Vor', L:'V', s:'v', m:'iron · ore', g:[S,[[16,16],[30,34],[44,16]]]},
+ {n:'Gorn', L:'G', s:'hard g', m:'fire · forge', g:[S,[[17,40],[43,64]],[[43,40],[17,64]]]},
+ {n:'Rurr', L:'R · RR', s:'rolled r', m:'river · the roll · kinline', g:[S,[[30,22],[46,33],[30,45]],[[30,45],[47,66]]]},
+ {n:'Om', L:'O', s:'oh', m:'hall · the open mouth', g:[[[30,14],[49,50],[30,86],[11,50],[30,14]]]},
+ {n:'Dun', L:'U', s:'oo', m:'mountain · height', g:[[[12,84],[30,18],[48,84]]]},
+ {n:'Ath', L:'A', s:'ah', m:'deed · act · doing', g:[S,[[30,12],[16,30]],[[30,12],[44,30]],[[20,40],[40,40]]]},
+ {n:'Ven', L:'E', s:'eh', m:'gold · worth · bright metal', g:[S,[[30,26],[46,26]],[[30,50],[46,50]],[[30,74],[46,74]]]},
+ {n:'Rin', L:'I', s:'ee', m:'mark · cut · name', g:[S,[[23,50],[37,50]]]},
+ {n:'Bral', L:'B', s:'b', m:'beard · elder · forebear', g:[S,[[30,18],[46,29],[30,40]],[[30,44],[46,55],[30,66]]]},
+ {n:'Torn', L:'T', s:'t', m:'gate · threshold', g:[S,[[16,28],[30,12],[44,28]]]},
+ {n:'Fenn', L:'F', s:'f', m:'deep-water · spring · longing', g:[S,[[30,20],[46,10]],[[30,40],[46,30]]]},
+ {n:'Pel', L:'P', s:'p', m:'hand · craft · making', g:[S,[[30,18],[46,18],[46,38],[30,38]]]},
+ {n:'Lor', L:'L', s:'l', m:'song · memory · told-thing', g:[S,[[30,20],[47,33]]]},
+ {n:'Nar', L:'N', s:'n', m:'dark · unlit · night', g:[S,[[16,42],[44,62]]]},
+ {n:'Morn', L:'M', s:'m', m:'shadow · loss · the unmade', g:[[[16,14],[16,86]],[[44,14],[44,86]],[[16,32],[44,60]],[[44,32],[16,60]]]},
+ {n:'Sarn', L:'S', s:'s', m:'road · way · passage', g:[[[45,14],[19,38],[45,58],[19,82]]]},
+ {n:'Hald', L:'H', s:'h', m:'to hold · to guard · to keep', g:[[[18,14],[18,86]],[[42,14],[42,86]],[[18,50],[42,50]]]},
+];
+
+// The two sacred marks — not letters, but the Forgefather's tools.
+const MARKS=[
+ {n:'Tharr', role:'opens', say:'', d:'The anvil, seen from the side — Tharros\'s first mark. No carving begins without it: the base that holds without being held.', g:[S,[[14,24],[46,24]],[[30,24],[45,42]],[[30,24],[15,42]]]},
+ {n:'Dhomm', role:'seals', say:'“THOHM”', d:'The hammer, seen from the side. Struck at an inscription\'s end — nothing is <em>thar</em>, true-made, until the hammer seals it shut. Alone among the runes, its sound is a hum, the ring left in the work after the blow.', g:[[[30,30],[30,88]],[[14,14],[46,14],[46,30],[14,30],[14,14]]]},
+];
+
+function svg(g){
+  const poly=g.map(seg=>`<polyline points="${seg.map(p=>p.join(',')).join(' ')}" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="square" stroke-linejoin="miter"/>`).join('');
+  return `<svg viewBox="0 0 60 100" role="img" width="100%" height="100%">${poly}</svg>`;
+}
+
+document.getElementById('heroRune').innerHTML=svg(R[0].g);
+
+const grid=document.getElementById('grid');
+R.forEach(r=>{
+  const t=document.createElement('div');
+  t.className='tile reveal'+(r.holy?' holy':'');
+  t.tabIndex=0;
+  t.innerHTML=
+    (r.holy?'<span class="holy-tag">Forgefather’s mark</span>':'')+
+    `<span class="rune">${svg(r.g)}</span>`+
+    `<span class="r-name">${r.n}</span>`+
+    `<span class="r-letter">${r.L}</span>`+
+    `<span class="r-sound">${r.s}</span>`+
+    `<span class="r-mean">${r.m}</span>`;
+  grid.appendChild(t);
+});
+
+const mg=document.getElementById('marks-grid');
+MARKS.forEach(k=>{
+  const el=document.createElement('div');
+  el.className='mark';
+  el.innerHTML=
+    `<span class="rune">${svg(k.g)}</span>`+
+    `<div class="mark-body">`+
+      `<span class="r-name">${k.n}${k.say?` <span class="say">${k.say}</span>`:''}</span>`+
+      `<span class="r-role">${k.role}</span>`+
+      `<p>${k.d}</p>`+
+    `</div>`;
+  mg.appendChild(el);
+});
+
+// reveal-on-scroll
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+if(reduce){document.querySelectorAll('.tile').forEach(t=>t.classList.remove('reveal'));}
+else{
+  const io=new IntersectionObserver((es)=>{
+    es.forEach((e,i)=>{ if(e.isIntersecting){ const el=e.target;
+      setTimeout(()=>el.classList.remove('reveal'), (Array.prototype.indexOf.call(grid.children,el)%8)*45);
+      io.unobserve(el);} });
+  },{threshold:.15});
+  document.querySelectorAll('.tile').forEach(t=>io.observe(t));
+}
+
+// theme toggle
+const root=document.documentElement, tg=document.getElementById('toggle');
+tg.addEventListener('click',()=>{
+  const dark=matchMedia('(prefers-color-scheme:dark)').matches;
+  const cur=root.getAttribute('data-theme')|| (dark?'dark':'light');
+  root.setAttribute('data-theme', cur==='dark'?'light':'dark');
+});
+</script>
