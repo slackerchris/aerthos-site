@@ -1,0 +1,68 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+
+const worldEntries = await getCollection("world");
+const categories = [...new Set(worldEntries.map((e) => e.data.category))];
+---
+
+<PageLayout title="World of Aerthos" description="Explore the lore, magic, and history of Aerthos.">
+  <h1>The World of Aerthos</h1>
+  <p class="page-intro">Maps, magic, pantheons, and histories — the foundations of the Age of Reclamation.</p>
+
+  {
+    categories.map((category) => {
+      const entries = worldEntries
+        .filter((e) => e.data.category === category)
+        .sort((a, b) => a.data.order - b.data.order);
+
+      return (
+        <section class="world-category">
+          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
+          <ul>
+            {entries.map((entry) => (
+              <li>
+                <a href={`/world/${entry.id}/`}>
+                  <strong>{entry.data.title}</strong>
+                  <span class="entry-desc">{entry.data.description}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      );
+    })
+  }
+</PageLayout>
+
+<style>
+  .page-intro {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .world-category {
+    margin-bottom: 2.5rem;
+  }
+  .world-category h2 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  .world-category ul {
+    list-style: none;
+    padding: 0;
+  }
+  .world-category li {
+    margin-bottom: 0.75rem;
+  }
+  .world-category a {
+    text-decoration: none;
+    color: inherit;
+  }
+  .entry-desc {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>

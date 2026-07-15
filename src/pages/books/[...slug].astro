@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const books = await getCollection("books");
+  return books.map((book) => ({
+    params: { slug: book.id },
+    props: { book },
+  }));
+}
+
+const { book } = Astro.props;
+const { Content } = await book.render();
+---
+
+<BaseLayout title={book.data.title} description={book.data.synopsis}>
+  <article class="prose book-page">
+    <header class="book-header">
+      <h1>{book.data.title}</h1>
+      {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
+      <span class="book-series">{book.data.series}</span>
+      &mdash;
+      <span class={`status-badge status-${book.data.status}`}>{book.data.status}</span>
+    </header>
+
+    <div class="book-body">
+      <Content />
+    </div>
+
+    {book.data.links && (
+      <div class="book-links">
+        {book.data.links.amazon && <a href={book.data.links.amazon} class="btn btn-primary">Buy on Amazon</a>}
+        {book.data.links.goodreads && <a href={book.data.links.goodreads} class="btn btn-secondary">Goodreads</a>}
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  .book-page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  .book-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .book-subtitle {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 1.1rem;
+  }
+  .book-series {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+  .book-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+</style>

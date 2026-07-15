@@ -1,0 +1,232 @@
+/* ===== Variables ===== */
+:root {
+  --bg: #fafaf9;
+  --text: #1c1917;
+  --text-muted: #78716c;
+  --border: #d6d3d1;
+  --tag-bg: #e7e5e4;
+  --accent: #b45309;
+  --accent-hover: #92400e;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1917;
+    --text: #e7e5e4;
+    --text-muted: #a8a29e;
+    --border: #44403c;
+    --tag-bg: #292524;
+    --accent: #d97706;
+    --accent-hover: #f59e0b;
+    color-scheme: dark;
+  }
+}
+
+/* ===== Reset ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4 {
+  font-family: Georgia, serif;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.75rem; margin-top: 2rem; }
+h3 { font-size: 1.25rem; margin-top: 1.5rem; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+a:hover {
+  color: var(--accent-hover);
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+/* ===== Navigation ===== */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+.site-nav .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--text);
+  letter-spacing: 0.03em;
+}
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+.site-nav li a {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.site-nav li a:hover {
+  color: var(--text);
+}
+
+/* ===== Footer ===== */
+footer {
+  margin-top: 4rem;
+  padding: 2rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.footer-content {
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+.footer-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+.footer-nav a:hover {
+  color: var(--text);
+}
+
+/* ===== Prose Content ===== */
+.prose {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  padding: 0.6em 1.25em;
+  font-size: 1rem;
+  font-family: inherit;
+  border-radius: 0.375rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: #fff;
+}
+.btn-secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-secondary:hover {
+  background: var(--tag-bg);
+  color: var(--text);
+}
+
+/* ===== Status Badges ===== */
+.status-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.2em 0.6em;
+  border-radius: 1em;
+  background: var(--tag-bg);
+}
+
+/* ===== Tags ===== */
+.tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+.tag {
+  font-size: 0.75rem;
+  padding: 0.15em 0.5em;
+  background: var(--tag-bg);
+  border-radius: 0.25rem;
+}
+
+/* ===== Blog Post ===== */
+.post-header {
+  margin-bottom: 2rem;
+}
+.post-header time {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.post-body {
+  line-height: 1.8;
+}
+.post-body p {
+  margin-bottom: 1.25rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  html { font-size: 16px; }
+  .site-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .site-nav ul {
+    gap: 1rem;
+  }
+  .footer-content {
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: center;
+  }
+  .hero h1 { font-size: 2.5rem; }
+}

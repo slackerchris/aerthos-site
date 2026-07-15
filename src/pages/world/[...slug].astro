@@ -1,0 +1,43 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("world");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <article class="prose world-page">
+    <header>
+      <span class="world-category-label">{entry.data.category}</span>
+      <h1>{entry.data.title}</h1>
+    </header>
+    <div class="world-body">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .world-page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  .world-category-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+  }
+</style>

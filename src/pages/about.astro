@@ -1,0 +1,41 @@
+---
+import PageLayout from "../layouts/PageLayout.astro";
+---
+
+<PageLayout title="About" description="About Chris, author of the Aerthos series.">
+  <h1>About the Author</h1>
+
+  <div class="about-content">
+    <p>
+      Chris writes epic fantasy. Aerthos is the world he's been building —
+      a place where the Sundering shattered the old order and left mortals
+      to pick up the pieces.
+    </p>
+    <p>
+      More bio coming soon.
+    </p>
+  </div>
+
+  <section class="contact-section">
+    <h2>Get in Touch</h2>
+    <p>
+      For inquiries, reach out via the <a href="/newsletter">newsletter</a> or
+      find me on social media (links coming soon).
+    </p>
+  </section>
+</PageLayout>
+
+<style>
+  .about-content {
+    max-width: 40rem;
+  }
+  .about-content p {
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .contact-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+</style>

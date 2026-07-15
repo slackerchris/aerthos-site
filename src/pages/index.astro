@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Home" description="Aerthos — an epic fantasy series. Explore the Age of Reclamation.">
+  <section class="hero">
+    <h1>Aerthos</h1>
+    <p class="hero-subtitle">The Age of Reclamation</p>
+    <p class="hero-description">
+      An epic fantasy series set in a world shattered by the Sundering,
+      where mortals and remnants of the divine vie for the future.
+    </p>
+    <div class="hero-actions">
+      <a href="/books" class="btn btn-primary">Explore the Books</a>
+      <a href="/world" class="btn btn-secondary">Discover the World</a>
+    </div>
+  </section>
+
+  <section class="home-section">
+    <h2>Latest from the Blog</h2>
+    <!-- Blog preview will go here once posts exist -->
+    <p>Writing updates, lore deep-dives, and release news coming soon.</p>
+    <a href="/blog">Read the blog &rarr;</a>
+  </section>
+
+  <section class="home-section newsletter-cta">
+    <h2>Stay in the Loop</h2>
+    <p>Sign up for launch updates, early previews, and behind-the-scenes lore.</p>
+    <a href="/newsletter" class="btn btn-primary">Join the Newsletter</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+  }
+  .hero h1 {
+    font-size: 3.5rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+  .hero-description {
+    max-width: 36rem;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .home-section {
+    max-width: 48rem;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+  }
+  .newsletter-cta {
+    text-align: center;
+    padding: 3rem 1rem;
+    border-top: 1px solid var(--border);
+  }
+</style>

@@ -1,0 +1,62 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getCollection } from "astro:content";
+
+const books = await getCollection("books");
+books.sort((a, b) => a.data.order - b.data.order);
+---
+
+<PageLayout title="Books" description="The Age of Reclamation — discover the books of Aerthos.">
+  <h1>Books</h1>
+  <p class="series-intro">The Age of Reclamation trilogy and companion works.</p>
+
+  {books.length === 0 ? (
+    <p>Book pages coming soon.</p>
+  ) : (
+    <div class="book-grid">
+      {books.map((book) => (
+        <div class="book-card">
+          <h2>
+            <a href={`/books/${book.id}/`}>{book.data.title}</a>
+          </h2>
+          {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
+          <span class={`status-badge status-${book.data.status}`}>{book.data.status}</span>
+          <p>{book.data.synopsis}</p>
+        </div>
+      ))}
+    </div>
+  )}
+</PageLayout>
+
+<style>
+  .series-intro {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .book-grid {
+    display: grid;
+    gap: 2rem;
+  }
+  .book-card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+  }
+  .book-card h2 {
+    margin-bottom: 0.25rem;
+  }
+  .book-subtitle {
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .status-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.2em 0.6em;
+    border-radius: 1em;
+    background: var(--tag-bg);
+    margin: 0.5rem 0;
+  }
+</style>
