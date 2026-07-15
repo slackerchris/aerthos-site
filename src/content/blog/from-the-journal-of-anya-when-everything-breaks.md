@@ -1,7 +1,7 @@
 ---
 title: "From the Journal of Anya: When Everything Breaks"
 description: "The Crows, a dying grove, and the dangerous hope of transformation."
-date: 2026-07-17
+date: 2026-07-13
 tags: ["journal", "anya", "echo-of-the-sunstone"]
 draft: false
 ---

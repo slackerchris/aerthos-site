@@ -1,7 +1,7 @@
 ---
 title: "From the Journal of Elara: After the Canyon"
 description: "Grey porridge, breadcrumbs of memory, and the slow work of holding onto who you were."
-date: 2026-07-19
+date: 2026-07-15
 tags: ["journal", "elara", "threads-of-the-weave"]
 draft: false
 ---
