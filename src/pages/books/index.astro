@@ -17,7 +17,7 @@ books.sort((a, b) => a.data.order - b.data.order);
       {books.map((book) => (
         <div class="book-card">
           <h2>
-            <a href={`/books/${book.id}/`}>{book.data.title}</a>
+            <a href={`/books/${book.id.replace(/\.md$/, '')}/`}>{book.data.title}</a>
           </h2>
           {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
           <span class={`status-badge status-${book.data.status}`}>{book.data.status}</span>
