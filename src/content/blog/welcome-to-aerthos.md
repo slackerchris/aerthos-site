@@ -3,6 +3,7 @@ title: "Welcome to Aerthos"
 description: "Launching the official author site for the Age of Reclamation series."
 date: 2026-07-15
 tags: ["news", "site-launch"]
+draft: true
 ---
 
 Welcome! This is the new home for all things Aerthos — the epic fantasy series

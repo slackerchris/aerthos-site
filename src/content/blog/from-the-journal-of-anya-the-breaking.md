@@ -3,7 +3,7 @@ title: "From the Journal of Anya: The Breaking"
 description: "Three years on the road, a dwarf who left for duty, and a promise made in blood."
 date: 2026-07-12
 tags: ["journal", "anya", "echo-of-the-sunstone"]
-draft: false
+draft: true
 ---
 
 <div class="journal-note">*An in-world journal entry from Anya, one of the three protagonists of the Age of Reclamation trilogy.*</div>

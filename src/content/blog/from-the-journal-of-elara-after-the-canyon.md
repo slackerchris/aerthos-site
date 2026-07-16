@@ -3,7 +3,7 @@ title: "From the Journal of Elara: After the Canyon"
 description: "Grey porridge, breadcrumbs of memory, and the slow work of holding onto who you were."
 date: 2026-07-15
 tags: ["journal", "elara", "threads-of-the-weave"]
-draft: false
+draft: true
 ---
 
 <div class="journal-note">*An in-world journal entry from Elara. Continued from "After the Road from Greygate."*</div>

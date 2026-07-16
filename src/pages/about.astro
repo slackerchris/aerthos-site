@@ -2,40 +2,18 @@
 import PageLayout from "../layouts/PageLayout.astro";
 ---
 
-<PageLayout title="About" description="About Chris, author of the Aerthos series.">
+<PageLayout title="About" description="About Chris, author and creator of the world of Aerthos.">
   <h1>About the Author</h1>
-
   <div class="about-content">
-    <p>
-      Chris writes epic fantasy. Aerthos is the world he's been building —
-      a place where the Sundering shattered the old order and left mortals
-      to pick up the pieces.
-    </p>
-    <p>
-      More bio coming soon.
-    </p>
+    <p class="lead">Chris Eckman is an Ohio-based fantasy writer, software developer, father, and lifelong builder of things.</p>
+    <p>He is the author of the <a href="/books"><strong>Age of Reclamation</strong></a> series, set in the fractured world of Aerthos. His stories combine character-driven storytelling, deep history, dangerous magic, and a stubborn belief that ruin does not have to be the end.</p>
   </div>
-
-  <section class="contact-section">
-    <h2>Get in Touch</h2>
-    <p>
-      For inquiries, reach out via the <a href="/newsletter">newsletter</a> or
-      find me on social media (links coming soon).
-    </p>
-  </section>
+  <blockquote>“Ruin is not the end. It is where the work begins.”</blockquote>
 </PageLayout>
 
 <style>
-  .about-content {
-    max-width: 40rem;
-  }
-  .about-content p {
-    line-height: 1.8;
-    margin-bottom: 1rem;
-  }
-  .contact-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
+  .about-content { max-width: 42rem; }
+  .about-content p { color: #cec9be; line-height: 1.85; }
+  .lead { font-size: 1.2rem; }
+  blockquote { margin: 3rem 0 0; padding: 2rem; border-left: 2px solid var(--gold); background: var(--tag-bg); color: var(--gold-bright); font-size: 1.35rem; font-style: italic; }
 </style>

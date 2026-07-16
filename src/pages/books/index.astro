@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 
 const books = await getCollection("books");
 books.sort((a, b) => a.data.order - b.data.order);
+const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In Development", published: "Available Now" };
 ---
 
 <PageLayout title="Books" description="The Age of Reclamation — discover the books of Aerthos.">
@@ -20,7 +21,7 @@ books.sort((a, b) => a.data.order - b.data.order);
             <a href={`/books/${book.id.replace(/\.md$/, '')}/`}>{book.data.title}</a>
           </h2>
           {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
-          <span class={`status-badge status-${book.data.status}`}>{book.data.status}</span>
+          <span class={`status-badge status-${book.data.status}`}>Book {book.data.order} · {readerStatus[book.data.status]}</span>
           <p>{book.data.synopsis}</p>
         </div>
       ))}

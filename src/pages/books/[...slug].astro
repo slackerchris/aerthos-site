@@ -12,21 +12,26 @@ export async function getStaticPaths() {
 
 const { book } = Astro.props;
 const { Content } = await book.render();
+const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In Development", published: "Available Now" };
 ---
 
 <BaseLayout title={book.data.title} description={book.data.synopsis}>
   <article class="prose book-page">
     <header class="book-header">
-      <h1>{book.data.title}</h1>
-      {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
-      <span class="book-series">{book.data.series}</span>
-      &mdash;
-      <span class={`status-badge status-${book.data.status}`}>{book.data.status}</span>
+      <div class="book-emblem" aria-hidden="true"><span>✦</span></div>
+      <div class="book-intro">
+        <p class="book-kicker">Book {book.data.order} · {book.data.series}</p>
+        <h1>{book.data.title}</h1>
+        {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
+        <p class="book-synopsis">{book.data.synopsis}</p>
+        <div class="book-actions">
+          {book.data.links?.excerpt && <a href={book.data.links.excerpt} class="btn btn-primary">Read an excerpt</a>}
+          <span class={`status-badge status-${book.data.status}`}>{readerStatus[book.data.status]}</span>
+        </div>
+      </div>
     </header>
 
-    <div class="book-body">
-      <Content />
-    </div>
+    <div class="book-body"><Content /></div>
 
     {book.data.links && (
       <div class="book-links">
@@ -38,28 +43,20 @@ const { Content } = await book.render();
 </BaseLayout>
 
 <style>
-  .book-page {
-    max-width: 48rem;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-  .book-header {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  .book-subtitle {
-    color: var(--text-muted);
-    font-style: italic;
-    font-size: 1.1rem;
-  }
-  .book-series {
-    color: var(--text-muted);
-    font-size: 0.875rem;
-  }
-  .book-links {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 3rem;
-  }
+  .book-page { max-width: 68rem; margin: 0 auto; padding: clamp(3rem,8vw,6rem) 1.5rem; }
+  .book-header { margin-bottom: 4rem; padding-bottom: 4rem; display: grid; grid-template-columns: minmax(13rem,.75fr) 1.25fr; align-items: center; gap: clamp(2rem,7vw,6rem); border-bottom: 1px solid var(--border); }
+  .book-header::before { display: none; }
+  .book-emblem { aspect-ratio: 3/4; display: grid; place-items: center; border: 1px solid var(--border-strong); background: radial-gradient(circle,rgba(214,182,109,.14),transparent 36%),linear-gradient(145deg,rgba(155,73,52,.13),rgba(214,182,109,.03)); box-shadow: inset 0 0 0 1rem rgba(9,13,12,.45); }
+  .book-emblem span { position: relative; width: 45%; aspect-ratio: 1; display: grid; place-items: center; color: var(--gold-bright); font-size: 2.5rem; }
+  .book-emblem span::before { content: ""; position: absolute; inset: .5rem; border: 1px solid var(--gold); transform: rotate(45deg); }
+  .book-kicker { margin: 0 0 1rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .65rem; letter-spacing: .17em; text-transform: uppercase; }
+  .book-intro h1 { margin-bottom: .7rem; }
+  .book-subtitle { color: var(--text-muted); font-size: 1.1rem; font-style: italic; }
+  .book-synopsis { margin-top: 1.5rem; color: #cec9be; font-size: 1rem; line-height: 1.8; }
+  .book-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+  .book-body { max-width: 48rem; margin: auto; }
+  .book-body :global(h2) { margin-top: 3rem; }
+  .book-body :global(li) { margin: .5rem 0; color: #cec9be; }
+  .book-links { margin-top: 3rem; display: flex; justify-content: center; gap: 1rem; }
+  @media (max-width:700px) { .book-header { grid-template-columns: 1fr; } .book-emblem { width: min(15rem,70vw); margin: auto; } }
 </style>

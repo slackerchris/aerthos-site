@@ -1,6 +1,9 @@
 ---
 // Base layout — wraps every page
 const pathname = Astro.url.pathname;
+const description = Astro.props.description || "Aerthos — epic fantasy from Chris";
+const pageTitle = Astro.props.title ? `${Astro.props.title} — Aerthos` : "Aerthos";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const navItems = [
   ["/books", "Books"],
   ["/blog", "Journal"],
@@ -14,9 +17,20 @@ const navItems = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={Astro.props.description || "Aerthos — epic fantasy from Chris"} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Aerthos" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={new URL("/images/aerthos-og.webp", Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Map of the world of Aerthos" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <title>{Astro.props.title ? `${Astro.props.title} — Aerthos` : "Aerthos"}</title>
+    <title>{pageTitle}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/styles/global.css" />
@@ -41,7 +55,6 @@ const navItems = [
       <div class="footer-content">
         <p>&copy; {new Date().getFullYear()} Chris. All rights reserved.</p>
         <nav class="footer-nav">
-          <a href="/newsletter">Newsletter</a>
           <a href="/about">About</a>
           <a href="/blog">Blog</a>
         </nav>

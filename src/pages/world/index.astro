@@ -1,80 +1,62 @@
 ---
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
-
-const worldEntries = await getCollection("world");
-const categories = [...new Set(worldEntries.map((e) => e.data.category))];
 ---
 
-<PageLayout title="World of Aerthos" description="Explore the lore, magic, and history of Aerthos.">
+<PageLayout title="World of Aerthos" description="Enter a world still rebuilding three thousand years after magic shattered the old order.">
   <h1>The World of Aerthos</h1>
-  <p class="page-intro">Maps, magic, pantheons, and histories — the foundations of the Age of Reclamation.</p>
+  <p class="page-intro">Three thousand years after the Sundering, every kingdom is built over the bones of what came before. Magic survives. The gods do not answer. The old world is beginning to stir.</p>
 
-  {
-    categories.map((category) => {
-      const entries = worldEntries
-        .filter((e) => e.data.category === category)
-        .sort((a, b) => a.data.order - b.data.order);
+  <figure class="map-frame">
+    <a href="/images/aerthos-world-map.webp" target="_blank">
+      <img src="/images/aerthos-world-map.webp" alt="Illustrated map of Aerthos showing Argent, the Valorian Empire, the Ironspine Mountains, the Sundering Wastes, Greygate, Silverford, and the Whispering Woods" width="2400" height="1800" />
+    </a>
+    <figcaption><span>The known world</span><span>Select the map to view it at full size</span></figcaption>
+  </figure>
 
-      return (
-        <section class="world-category">
-          <h2>{category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-          <ul>
-            {entries.map((entry) => (
-              <li>
-                <a href={`/world/${entry.id.replace(/\.md$/, '')}/`}>
-                  <strong>{entry.data.title}</strong>
-                  <span class="entry-desc">{entry.data.description}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      );
-    })
-  }
+  <div class="world-grid">
+    <section>
+      <span>01 · History</span>
+      <h2>The Sundering</h2>
+      <p>The cataclysm broke the old world, severed mortals from the divine, and left every people of Aerthos to build among the ruins.</p>
+    </section>
+    <section>
+      <span>02 · Magic</span>
+      <h2>The Weave</h2>
+      <p>Magic is not a limitless gift. It has laws, costs, and fractures—and those who reach too deeply risk being changed by what answers.</p>
+    </section>
+    <section>
+      <span>03 · Faith</span>
+      <h2>The Silent Gods</h2>
+      <p>The old pantheon shaped nations and bloodlines. Their silence has lasted millennia, but absence is not the same thing as death.</p>
+    </section>
+  </div>
 
-  <section class="world-category">
-    <h2>Languages</h2>
-    <ul>
-      <li>
-        <a href="/world/tharrun-alphabet.html">
-          <strong>The Tharrun — Dwarven Alphabet</strong>
-          <span class="entry-desc">The sacred cuts: twenty runes of Tharrudin, the tongue of Tharros the Forgefather.</span>
-        </a>
-      </li>
-    </ul>
-  </section>
+  <a class="language-card" href="/world/tharrun-alphabet.html">
+    <div><span>Language archive</span><h2>The Tharrun</h2><p>Twenty sacred cuts of the dwarven tongue, shaped by the Forgefather.</p></div>
+    <strong aria-hidden="true">↗</strong>
+  </a>
 </PageLayout>
 
 <style>
-  .page-intro {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-  }
-  .world-category {
-    margin-bottom: 2.5rem;
-  }
-  .world-category h2 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 0.75rem;
-  }
-  .world-category ul {
-    list-style: none;
-    padding: 0;
-  }
-  .world-category li {
-    margin-bottom: 0.75rem;
-  }
-  .world-category a {
-    text-decoration: none;
-    color: inherit;
-  }
-  .entry-desc {
-    display: block;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-  }
+  .page-intro { max-width: 42rem; margin-bottom: 3rem; color: var(--text-muted); font-size: 1.1rem; }
+  .map-frame { width: min(76rem,calc(100vw - 2rem)); margin: 0 0 4rem 50%; transform: translateX(-50%); padding: clamp(.45rem,1vw,.8rem); background: var(--parchment); box-shadow: 0 2rem 6rem rgba(0,0,0,.4); }
+  .map-frame a { position: relative; display: block; overflow: hidden; color: inherit; }
+  .map-frame a::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 3rem rgba(52,35,15,.5); pointer-events: none; }
+  .map-frame img { width: 100%; height: auto; display: block; }
+  .map-frame figcaption { padding: .8rem .35rem .15rem; display: flex; justify-content: space-between; gap: 1rem; color: var(--ink); font-family: Arial,sans-serif; font-size: .58rem; letter-spacing: .13em; text-transform: uppercase; }
+  .world-grid { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); }
+  .world-grid section { min-height: 18rem; padding: 1.5rem; background: var(--parchment); color: var(--ink); }
+  .world-grid section + section { border-left: 1px solid rgba(57,42,22,.3); }
+  .world-grid span { color: #70472c; font-family: Arial,sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .language-card span { color: var(--gold); font-family: Arial,sans-serif; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+  .world-grid h2 { margin: 4rem 0 1rem; font-size: 1.35rem; }
+  .world-grid h2 { color: var(--ink); }
+  .world-grid p { color: #514535; font-size: .85rem; }
+  .language-card p { color: var(--text-muted); font-size: .85rem; }
+  .language-card { margin-top: 1rem; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border); color: var(--text); text-decoration: none; transition: background .2s, border-color .2s; }
+  .language-card:hover { border-color: var(--border-strong); background: var(--tag-bg); color: var(--text); }
+  .language-card h2 { margin: .5rem 0; }
+  .language-card p { margin: 0; }
+  .language-card strong { color: var(--gold); font-size: 1.5rem; }
+  @media (max-width: 700px) { .map-frame figcaption span:last-child { display: none; } .world-grid { grid-template-columns: 1fr; } .world-grid section { min-height: auto; } .world-grid section + section { border-left: 0; border-top: 1px solid rgba(57,42,22,.3); } .world-grid h2 { margin-top: 2rem; } }
 </style>

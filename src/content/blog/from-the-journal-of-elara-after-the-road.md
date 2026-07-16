@@ -3,7 +3,7 @@ title: "From the Journal of Elara: After the Road from Greygate"
 description: "On losing a body, holding two goddesses, and being loved anyway."
 date: 2026-07-14
 tags: ["journal", "elara", "threads-of-the-weave"]
-draft: false
+draft: true
 ---
 
 <div class="journal-note">*An in-world journal entry from Elara, one of the three protagonists of the Age of Reclamation trilogy.*</div>

@@ -23,6 +23,7 @@ const books = defineCollection({
       .object({
         amazon: z.string().url().optional(),
         goodreads: z.string().url().optional(),
+        excerpt: z.string().optional(),
       })
       .optional(),
   }),
@@ -34,6 +35,7 @@ const world = defineCollection({
     description: z.string(),
     category: z.enum(["magic", "calendar", "locations", "pantheon", "peoples", "history"]),
     order: z.number().default(0),
+    published: z.boolean().default(true),
   }),
 });
 
