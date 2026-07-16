@@ -6,6 +6,12 @@ const books = (await getCollection("books")).sort((a, b) => a.data.order - b.dat
 const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
+const readerStatus = {
+  beta: "Book One · In Revision",
+  editing: "In Revision",
+  draft: "In Development",
+  published: "Available Now",
+};
 ---
 
 <BaseLayout title="Epic fantasy from a shattered world" description="Enter Aerthos, an epic fantasy world shattered by the Sundering. Explore the Age of Reclamation books, lore, and character journals.">
@@ -13,10 +19,10 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     <div class="hero-runes" aria-hidden="true">✦</div>
     <div class="hero-content">
       <p class="eyebrow">The Age of Reclamation</p>
-      <h1>A world broken.<br /><em>Not yet lost.</em></h1>
-      <p class="hero-description">The gods are gone. The old magic is waking. Across a land still scarred by the Sundering, unlikely heroes must decide what deserves to be reclaimed—and what should remain buried.</p>
+      <h1>The world survived.<br /><em>What wakes next?</em></h1>
+      <p class="hero-description">Three thousand years after magic shattered the old world, a thief, a dwarven exile, and an elven weaver uncover a divine relic capable of reshaping reality. Every kingdom wants it. A hidden enemy has been waiting for it.</p>
       <div class="hero-actions">
-        <a href="/books" class="btn btn-primary">Begin the journey <span aria-hidden="true">→</span></a>
+        <a href="/books/echo-of-the-sunstone/" class="btn btn-primary">Discover Book One <span aria-hidden="true">→</span></a>
         <a href="/world" class="btn btn-secondary">Explore the world</a>
       </div>
     </div>
@@ -32,7 +38,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
       {books.map((book, index) => (
         <a class="book-card" href={`/books/${book.id.replace(/\.md$/, '')}/`}>
           <span class="book-number">0{index + 1}</span>
-          <span class="book-status">{book.data.status}</span>
+          <span class="book-status">{readerStatus[book.data.status]}</span>
           <h3>{book.data.title}</h3>
           {book.data.subtitle && <p>{book.data.subtitle}</p>}
           <span class="card-arrow" aria-hidden="true">↗</span>
@@ -41,8 +47,22 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </section>
 
+  <section class="fellowship-section">
+    <div class="section-heading">
+      <div><p class="eyebrow">Meet the fellowship</p><h2>Three lives that were never meant to cross.</h2></div>
+    </div>
+    <div class="character-grid">
+      <article><span>A</span><div><h3>Anya</h3><p>A thief who trusts knives more readily than people.</p></div></article>
+      <article><span>B</span><div><h3>Bjorn</h3><p>An exile carrying an oath heavier than his axe.</p></div></article>
+      <article><span>E</span><div><h3>Elara</h3><p>An elven weaver determined to mend a world her people abandoned.</p></div></article>
+    </div>
+  </section>
+
   <section class="world-callout">
-    <div class="sigil" aria-hidden="true"><span>✦</span></div>
+    <a class="map-window" href="/world" aria-label="Explore the world map of Aerthos">
+      <img src="/images/aerthos-world-map.webp" alt="A weathered illustrated map of Aerthos" width="2400" height="1800" loading="lazy" />
+      <span>View the map ↗</span>
+    </a>
     <div>
       <p class="eyebrow">Beyond the page</p>
       <h2>Every ruin remembers.</h2>
@@ -68,12 +88,6 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
     </div>
   </section>
 
-  <section class="newsletter-cta">
-    <p class="eyebrow">Stay near the fire</p>
-    <h2>The story is still being written.</h2>
-    <p>Get new chapters, world lore, and release news from the Age of Reclamation.</p>
-    <a href="/newsletter" class="btn btn-primary">Join the newsletter</a>
-  </section>
 </BaseLayout>
 
 <style>
@@ -90,7 +104,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .hero-runes { position: absolute; z-index: 1; color: rgba(214,182,109,.14); font-size: min(34vw, 25rem); line-height: 1; }
   .scroll-note { position: absolute; z-index: 3; bottom: 1.5rem; margin: 0; color: var(--text-muted); font-family: Arial, sans-serif; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; }
   .scroll-note span { margin-left: .6rem; color: var(--gold); }
-  .series-section, .journal-section { max-width: 76rem; margin: auto; padding: clamp(5rem, 10vw, 8rem) 1.5rem; }
+  .series-section, .journal-section, .fellowship-section { max-width: 76rem; margin: auto; padding: clamp(5rem, 10vw, 8rem) 1.5rem; }
   .section-heading { margin-bottom: 2.5rem; display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
   .section-heading h2 { max-width: 32rem; margin: 0; }
   .text-link { flex-shrink: 0; color: var(--text-muted); font-family: Arial, sans-serif; font-size: .7rem; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
@@ -106,11 +120,21 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .book-card p { max-width: 17rem; margin: 0; color: var(--text-muted); font-size: .85rem; font-style: italic; }
   .card-arrow { position: absolute; top: 1.6rem; right: 1.6rem; color: var(--text-muted); transition: color .2s, transform .2s; }
   .book-card:hover .card-arrow { color: var(--gold); transform: translate(3px,-3px); }
-  .world-callout { position: relative; max-width: 76rem; margin: 0 auto; padding: clamp(4rem, 8vw, 7rem); display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; gap: clamp(3rem, 8vw, 8rem); border: 1px solid var(--border); background: linear-gradient(120deg, rgba(155,73,52,.09), rgba(214,182,109,.035)); overflow: hidden; }
+  .fellowship-section { padding-top: 1rem; }
+  .character-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+  .character-grid article { min-height: 13rem; padding: 1.5rem; display: flex; align-items: end; gap: 1.2rem; border: 1px solid var(--border); background: linear-gradient(145deg, rgba(214,182,109,.045), transparent); }
+  .character-grid article > span { position: relative; width: 3.2rem; aspect-ratio: 1; flex: 0 0 auto; display: grid; place-items: center; color: var(--gold); }
+  .character-grid article > span::before { content: ""; position: absolute; inset: .45rem; border: 1px solid var(--border-strong); transform: rotate(45deg); }
+  .character-grid h3 { margin: 0 0 .5rem; font-size: 1.35rem; }
+  .character-grid p { margin: 0; color: var(--text-muted); font-size: .85rem; }
+  .world-callout { position: relative; max-width: 76rem; margin: 0 auto; padding: clamp(2rem,5vw,4rem); display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(2rem,6vw,6rem); border: 1px solid var(--border); background: linear-gradient(120deg,rgba(155,73,52,.09),rgba(214,182,109,.035)); overflow: hidden; }
   .world-callout h2 { margin: 0 0 1rem; }
   .world-callout > div:last-child > p:not(.eyebrow) { max-width: 35rem; color: var(--text-muted); }
-  .sigil { width: min(100%, 18rem); aspect-ratio: 1; margin: auto; display: grid; place-items: center; border: 1px solid var(--border-strong); border-radius: 50%; color: var(--gold); font-size: 4rem; box-shadow: inset 0 0 0 2rem rgba(214,182,109,.025), 0 0 5rem rgba(155,73,52,.12); }
-  .sigil span { width: 58%; aspect-ratio: 1; display: grid; place-items: center; border: 1px solid var(--border); transform: rotate(45deg); }
+  .map-window { position: relative; aspect-ratio: 4/3; display: block; overflow: hidden; border: 1px solid var(--border-strong); box-shadow: 0 1.5rem 4rem rgba(0,0,0,.35); color: var(--parchment-light); text-decoration: none; }
+  .map-window::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 3rem rgba(24,15,7,.6); pointer-events: none; }
+  .map-window img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s ease; }
+  .map-window span { position: absolute; z-index: 2; right: 1rem; bottom: 1rem; padding: .55rem .8rem; background: rgba(31,25,17,.88); font-family: Arial,sans-serif; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
+  .map-window:hover img { transform: scale(1.025); }
   .post-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .post-card { min-height: 19rem; padding: 2rem; display: flex; flex-direction: column; background: var(--bg-raised); color: var(--text); text-decoration: none; transition: background .2s; }
   .post-card:hover { background: var(--surface-soft); color: var(--text); }
@@ -118,8 +142,5 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft))
   .post-card h3 { margin: 2.5rem 0 .8rem; font-size: 1.4rem; }
   .post-card p { color: var(--text-muted); font-size: .85rem; }
   .post-card > span { margin-top: auto; color: var(--gold); font-family: Arial, sans-serif; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
-  .newsletter-cta { max-width: 76rem; margin: 0 auto 2rem; padding: clamp(5rem, 10vw, 8rem) 1.5rem; text-align: center; border-top: 1px solid var(--border); }
-  .newsletter-cta h2 { margin: 0 0 1rem; }
-  .newsletter-cta > p:not(.eyebrow) { max-width: 34rem; margin: 0 auto 2rem; color: var(--text-muted); }
-  @media (max-width: 760px) { .book-row, .post-grid { grid-template-columns: 1fr; } .book-card { min-height: 17rem; } .book-card + .book-card { border-left: 0; border-top: 1px solid var(--border); } .world-callout { margin-inline: 1rem; padding: 3rem 1.5rem; grid-template-columns: 1fr; } .sigil { width: 11rem; } .section-heading { align-items: start; flex-direction: column; } }
+  @media (max-width: 760px) { .book-row, .post-grid, .character-grid { grid-template-columns: 1fr; } .book-card { min-height: 17rem; } .book-card + .book-card { border-left: 0; border-top: 1px solid var(--border); } .world-callout { margin-inline: 1rem; padding: 1rem 1rem 3rem; grid-template-columns: 1fr; } .section-heading { align-items: start; flex-direction: column; } }
 </style>

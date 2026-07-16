@@ -1,40 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Explore the Tharrun, twenty sacred runes of the dwarven language of Aerthos." />
+<link rel="canonical" href="https://aerthos.site/world/tharrun-alphabet.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Aerthos" />
+<meta property="og:title" content="The Tharrun — Dwarven Alphabet of Aerthos" />
+<meta property="og:description" content="Twenty sacred cuts of Tharrudin, the language of the Ironspine dwarves." />
+<meta property="og:image" content="https://aerthos.site/images/aerthos-og.webp" />
+<meta name="twitter:card" content="summary_large_image" />
 <title>The Tharrun — Dwarven Alphabet of Aerthos</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="stylesheet" href="/styles/global.css" />
 <style>
   :root{
-    --bg:#e7e3db; --panel:#efece4; --tile:#e0dacd; --edge:#cdc6b8;
-    --ink:#241f27; --ink-soft:#574f5a; --muted:#847c86;
-    --accent:#b0501a; --accent-2:#c9691f; --glow:rgba(176,80,26,.16);
+    --panel:#1e1b15; --tile:#d7c294; --edge:rgba(224,195,126,.24);
+    --ink:#292218; --ink-soft:#514535; --muted:#766951;
+    --accent-2:#f1d898; --glow:rgba(214,182,109,.18);
     --font-display:"Palatino Linotype","Book Antiqua",Palatino,Georgia,"Times New Roman",serif;
     --font-body:Georgia,"Iowan Old Style","Times New Roman",serif;
-    --font-mono:ui-monospace,"SF Mono","Cascadia Code",Menlo,Consolas,monospace;
+    --font-mono:Arial,sans-serif;
     --maxw:1100px;
-  }
-  @media (prefers-color-scheme:dark){
-    :root{
-      --bg:#131218; --panel:#1b1a22; --tile:#232230; --edge:#37354492;
-      --ink:#e9e4da; --ink-soft:#bab4ad; --muted:#8b8593;
-      --accent:#e0782f; --accent-2:#f0a15c; --glow:rgba(224,120,47,.22);
-    }
-  }
-  :root[data-theme="light"]{
-    --bg:#e7e3db; --panel:#efece4; --tile:#e0dacd; --edge:#cdc6b8;
-    --ink:#241f27; --ink-soft:#574f5a; --muted:#847c86;
-    --accent:#b0501a; --accent-2:#c9691f; --glow:rgba(176,80,26,.16);
-  }
-  :root[data-theme="dark"]{
-    --bg:#131218; --panel:#1b1a22; --tile:#232230; --edge:#37354492;
-    --ink:#e9e4da; --ink-soft:#bab4ad; --muted:#8b8593;
-    --accent:#e0782f; --accent-2:#f0a15c; --glow:rgba(224,120,47,.22);
   }
 
   *{box-sizing:border-box}
   body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:var(--font-body); line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    background-image:
-      radial-gradient(120% 80% at 50% -10%, var(--glow), transparent 60%);
-    background-repeat:no-repeat;
+    margin:0; color:var(--text); font-family:var(--font-body); line-height:1.6;
+  }
+  .page-shell{position:relative; overflow:hidden}
+  .page-shell::before{
+    content:""; position:absolute; inset:0 0 auto; height:720px; z-index:-1;
+    background:linear-gradient(to bottom,rgba(16,15,12,.2),var(--bg) 92%),url('/images/aerthos-world-map.webp') 52% 39%/cover;
+    opacity:.18; filter:sepia(.25) saturate(.7);
   }
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(20px,5vw,48px)}
   .eyebrow{
@@ -44,37 +43,37 @@
   h1,h2,h3{font-family:var(--font-display); font-weight:600; text-wrap:balance; line-height:1.1}
 
   /* ---------- hero ---------- */
-  header{padding:clamp(52px,9vw,104px) 0 clamp(28px,5vw,48px)}
+  .page-header{padding:clamp(72px,11vw,128px) 0 clamp(28px,5vw,48px)}
   .hero{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(24px,5vw,56px); align-items:center}
   .hero-title h1{font-size:clamp(2.6rem,7vw,5rem); margin:.15em 0 .35em; letter-spacing:.01em}
   .hero-title h1 em{font-style:italic; color:var(--accent)}
-  .hero-title p{font-size:clamp(1.05rem,2vw,1.28rem); color:var(--ink-soft); max-width:34ch; margin:0}
+  .hero-title p{font-size:clamp(1.05rem,2vw,1.28rem); color:var(--text-muted); max-width:34ch; margin:0}
   .hero-rune{
     width:clamp(150px,26vw,240px); aspect-ratio:6/10;
     display:grid; place-items:center; position:relative;
     border:1px solid var(--edge); border-radius:3px;
-    background:linear-gradient(160deg,var(--panel),color-mix(in srgb,var(--panel) 70%, var(--bg)));
+    background:linear-gradient(145deg,var(--parchment-light),var(--parchment));
     box-shadow:0 24px 60px -34px var(--accent);
   }
   .hero-rune::after{
     content:"Tharr"; position:absolute; bottom:10px; left:0; right:0; text-align:center;
     font-family:var(--font-mono); font-size:.72rem; letter-spacing:.28em;
-    text-transform:uppercase; color:var(--muted);
+    text-transform:uppercase; color:var(--ink-soft);
   }
   .hero-rune svg{width:58%; height:58%; color:var(--accent); filter:drop-shadow(0 0 10px var(--glow))}
 
   .meta{
     display:flex; flex-wrap:wrap; gap:8px 22px; margin-top:clamp(26px,4vw,40px);
     padding-top:22px; border-top:1px solid var(--edge);
-    font-family:var(--font-mono); font-size:.78rem; color:var(--muted);
+    font-family:var(--font-mono); font-size:.72rem; letter-spacing:.04em; color:var(--text-muted);
   }
-  .meta b{color:var(--ink-soft); font-weight:600}
+  .meta b{color:var(--parchment-light); font-weight:600}
 
   /* ---------- sections ---------- */
   section{padding:clamp(40px,6vw,72px) 0}
   .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:clamp(22px,3vw,34px); flex-wrap:wrap}
   .sec-head h2{font-size:clamp(1.5rem,3vw,2.1rem); margin:0}
-  .sec-head .lede{color:var(--ink-soft); font-size:1rem; max-width:52ch}
+  .sec-head .lede{color:var(--text-muted); font-size:1rem; max-width:52ch}
 
   /* ---------- alphabet grid ---------- */
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:clamp(10px,1.4vw,16px)}
@@ -86,14 +85,14 @@
   }
   .tile.reveal{opacity:0; transform:translateY(14px)}
   .tile.holy{box-shadow:inset 0 0 0 1px var(--accent)}
-  .tile:hover{border-color:var(--accent); box-shadow:0 14px 30px -22px var(--accent)}
+  .tile:hover{border-color:var(--gold); box-shadow:0 18px 32px -20px rgba(0,0,0,.65); transform:translateY(-3px)}
   .tile:hover .rune{color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
   .rune{width:56px; height:88px; color:var(--ink); transition:color .25s, filter .25s}
   .tile.holy .rune{color:var(--accent)}
   .r-name{font-family:var(--font-display); font-size:1.34rem; letter-spacing:.01em; margin-top:6px}
   .r-letter{
     font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
-    color:var(--accent); background:color-mix(in srgb,var(--accent) 12%, transparent);
+    color:#6f4226; background:rgba(111,66,38,.1);
     padding:2px 8px; border-radius:2px;
   }
   .r-sound{font-family:var(--font-mono); font-size:.74rem; color:var(--ink-soft); margin-top:5px}
@@ -124,10 +123,10 @@
   .mark p{margin:0; color:var(--ink-soft); font-size:.92rem}
   .mark p em{font-style:italic; color:var(--ink)}
   .marks-note{
-    margin-top:clamp(18px,2.4vw,26px); color:var(--ink-soft); font-size:.98rem;
+    margin-top:clamp(18px,2.4vw,26px); color:var(--text-muted); font-size:.98rem;
     max-width:60ch; text-wrap:pretty;
   }
-  .marks-note b{color:var(--ink); font-weight:600}
+  .marks-note b{color:var(--text); font-weight:600}
 
   /* ---------- rules ---------- */
   .split{display:grid; grid-template-columns:1fr; gap:clamp(34px,5vw,56px)}
@@ -139,35 +138,28 @@
     color:var(--accent); padding-top:.2em; min-width:2ch;
   }
   ol.rules b{font-family:var(--font-display); font-weight:600; font-size:1.02rem}
-  ol.rules span{color:var(--ink-soft); font-size:.96rem}
+  ol.rules span{color:var(--text-muted); font-size:.96rem}
 
   /* ---------- phrasebook ---------- */
   .phrases{display:flex; flex-direction:column; gap:2px}
   .phrase{padding:16px 0; border-top:1px solid var(--edge)}
   .phrase:first-child{border-top:0}
-  .phrase .native{font-family:var(--font-display); font-size:1.28rem; color:var(--ink)}
+  .phrase .native{font-family:var(--font-display); font-size:1.28rem; color:var(--text)}
   .phrase .native .say{color:var(--accent)}
-  .phrase .gloss{font-family:var(--font-mono); font-size:.78rem; color:var(--muted); margin:3px 0 6px; letter-spacing:.02em}
-  .phrase .sense{color:var(--ink-soft); font-size:.96rem}
+  .phrase .gloss{font-family:var(--font-mono); font-size:.72rem; color:var(--gold); margin:3px 0 6px; letter-spacing:.04em}
+  .phrase .sense{color:var(--text-muted); font-size:.96rem}
   .coined{
     margin-top:26px; padding:20px 22px; border-left:3px solid var(--accent);
-    background:color-mix(in srgb,var(--accent) 7%, transparent); border-radius:0 3px 3px 0;
+    background:var(--tag-bg); border-radius:0 3px 3px 0;
   }
   .coined h3{margin:0 0 4px; font-size:1.15rem}
   .coined h3 em{color:var(--accent); font-style:normal}
-  .coined p{margin:0 0 12px; color:var(--ink-soft); font-size:.95rem}
+  .coined p{margin:0 0 12px; color:var(--text-muted); font-size:.95rem}
   .coined p:last-child{margin-bottom:0}
 
-  footer{padding:44px 0 72px; border-top:1px solid var(--edge); color:var(--muted); font-size:.86rem}
-  footer b{color:var(--ink-soft)}
-
-  .toggle{
-    position:fixed; top:16px; right:16px; z-index:10; cursor:pointer;
-    font-family:var(--font-mono); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase;
-    background:var(--panel); color:var(--ink-soft); border:1px solid var(--edge);
-    border-radius:2px; padding:8px 12px;
-  }
-  .toggle:focus-visible, .tile:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+  .page-footer{margin-top:0; padding:44px 0 72px; border-top:1px solid var(--edge); background:none; color:var(--text-muted); font-size:.86rem}
+  .page-footer b{color:var(--parchment-light)}
+  .tile:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 
   @media (max-width:640px){
     .hero{grid-template-columns:1fr; text-align:left}
@@ -178,11 +170,24 @@
     .tile.reveal{opacity:1; transform:none}
   }
 </style>
+</head>
+<body>
 
-<button class="toggle" id="toggle" aria-label="Switch light/dark theme">Theme</button>
+<header class="site-header">
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a href="/" class="logo" aria-label="Aerthos home"><span class="logo-mark" aria-hidden="true"><span>A</span></span>Aerthos</a>
+    <ul>
+      <li><a href="/books">Books</a></li>
+      <li><a href="/blog">Journal</a></li>
+      <li><a href="/world" aria-current="page">World</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </nav>
+</header>
 
+<main class="page-shell">
 <div class="wrap">
-  <header>
+  <header class="page-header">
     <div class="hero">
       <div class="hero-title">
         <span class="eyebrow">The dwarven script of Aerthos</span>
@@ -264,12 +269,20 @@
     </div>
   </section>
 
-  <footer class="wrap" style="padding-left:0;padding-right:0">
+  <footer class="page-footer">
     <b>Tharrun</b> · the writing system of <b>Tharrudin</b>, the High Tongue of the dwarves of the Ironspine.
     Common Dwarven — the vernacular of everyday names — keeps its harder <b>K</b> sounds; the High Tongue has shed them.
     Reference draft for the Aerthos manuscripts.
   </footer>
 </div>
+</main>
+
+<footer>
+  <div class="footer-content">
+    <p>&copy; 2026 Chris Eckman. All rights reserved.</p>
+    <nav class="footer-nav" aria-label="Footer navigation"><a href="/world">World</a><a href="/about">About</a><a href="/blog">Journal</a></nav>
+  </div>
+</footer>
 
 <script>
 const S=[[30,12],[30,88]];
@@ -350,11 +363,6 @@ else{
   document.querySelectorAll('.tile').forEach(t=>io.observe(t));
 }
 
-// theme toggle
-const root=document.documentElement, tg=document.getElementById('toggle');
-tg.addEventListener('click',()=>{
-  const dark=matchMedia('(prefers-color-scheme:dark)').matches;
-  const cur=root.getAttribute('data-theme')|| (dark?'dark':'light');
-  root.setAttribute('data-theme', cur==='dark'?'light':'dark');
-});
 </script>
+</body>
+</html>

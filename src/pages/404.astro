@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" description="This path has been lost to the Sundering.">
+  <section class="lost">
+    <p class="code">404</p>
+    <h1>This path was lost<br />to the Sundering.</h1>
+    <p>The road ends here, but the world does not.</p>
+    <div><a class="btn btn-primary" href="/">Return home</a><a class="btn btn-secondary" href="/books">Explore the books</a></div>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost { min-height: 70vh; padding: 6rem 1.5rem; display: grid; place-content: center; text-align: center; }
+  .code { margin: 0; color: var(--gold); font-family: Arial,sans-serif; font-size: .7rem; letter-spacing: .25em; }
+  .lost h1 { margin: 1rem 0; }
+  .lost > p:not(.code) { color: var(--text-muted); }
+  .lost div { margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; }
+</style>

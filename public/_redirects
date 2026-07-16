@@ -1,0 +1,16 @@
+/index.html                                  /                                      301
+/teasers.html                                /books/echo-of-the-sunstone/           301
+/newsletter                                  /blog/                                 302
+/newsletter/                                 /blog/                                 302
+/books/echo-of-the-sunstone.md               /books/echo-of-the-sunstone/           301
+/books/echo-of-the-sunstone.md/              /books/echo-of-the-sunstone/           301
+/books/shadows-of-the-sundering.md            /books/shadows-of-the-sundering/       301
+/books/shadows-of-the-sundering.md/           /books/shadows-of-the-sundering/       301
+/books/threads-of-the-weave.md                /books/threads-of-the-weave/            301
+/books/threads-of-the-weave.md/               /books/threads-of-the-weave/            301
+/world/magic-system.md                       /world/                                 301
+/world/magic-system.md/                      /world/                                 301
+/world/pantheon.md                           /world/                                 301
+/world/pantheon.md/                          /world/                                 301
+/world/the-sundering.md                      /world/                                 301
+/world/the-sundering.md/                     /world/                                 301

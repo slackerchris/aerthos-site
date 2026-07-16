@@ -1,15 +1,18 @@
 :root {
-  --bg: #090d0c;
-  --bg-raised: #101715;
-  --surface: #151d1a;
-  --surface-soft: #1a2420;
-  --text: #eee8db;
-  --text-muted: #a9aa9e;
+  --bg: #100f0c;
+  --bg-raised: #171510;
+  --surface: #1e1b15;
+  --surface-soft: #282319;
+  --text: #f0e5cf;
+  --text-muted: #b3aa98;
   --border: rgba(224, 195, 126, 0.2);
   --border-strong: rgba(224, 195, 126, 0.42);
   --gold: #d6b66d;
   --gold-bright: #f1d898;
   --rust: #9b4934;
+  --parchment: #d7c294;
+  --parchment-light: #ead9b4;
+  --ink: #292218;
   --accent: var(--gold);
   --accent-hover: var(--gold-bright);
   --tag-bg: rgba(214, 182, 109, 0.1);
@@ -26,8 +29,8 @@ body {
   flex-direction: column;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 15% -10%, rgba(104, 70, 43, 0.22), transparent 30rem),
-    radial-gradient(circle at 90% 20%, rgba(37, 74, 63, 0.16), transparent 34rem),
+    radial-gradient(circle at 15% -10%, rgba(128, 89, 45, 0.24), transparent 30rem),
+    radial-gradient(circle at 90% 20%, rgba(61, 72, 57, 0.14), transparent 34rem),
     var(--bg);
   color: var(--text);
   font-family: Georgia, "Times New Roman", serif;
@@ -59,12 +62,13 @@ p { margin-bottom: 1rem; }
 a { color: var(--accent); text-decoration-color: rgba(214, 182, 109, 0.45); text-underline-offset: .18em; }
 a:hover { color: var(--accent-hover); }
 ::selection { color: #130e08; background: var(--gold); }
+:focus-visible { outline: 2px solid var(--gold-bright); outline-offset: 4px; }
 
 .site-header {
   position: relative;
   z-index: 10;
   border-bottom: 1px solid rgba(224, 195, 126, 0.12);
-  background: rgba(9, 13, 12, 0.82);
+  background: rgba(16, 15, 12, 0.86);
   backdrop-filter: blur(14px);
 }
 .site-nav {
