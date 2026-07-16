@@ -1,63 +1,83 @@
 ---
-import PageLayout from "../../layouts/PageLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const books = await getCollection("books");
-books.sort((a, b) => a.data.order - b.data.order);
+const books = (await getCollection("books")).sort((a, b) => a.data.order - b.data.order);
+const [echo, ...futureBooks] = books;
 const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In Development", published: "Available Now" };
 ---
 
-<PageLayout title="Books" description="The Age of Reclamation — discover the books of Aerthos.">
-  <h1>Books</h1>
-  <p class="series-intro">The Age of Reclamation trilogy and companion works.</p>
+<BaseLayout title="The Age of Reclamation" description="Discover Echo of the Sunstone and the books of the Age of Reclamation trilogy.">
+  <div class="books-page">
+    <header class="series-header">
+      <p>The Age of Reclamation</p>
+      <h1>Stories from a world rebuilding.</h1>
+    </header>
 
-  {books.length === 0 ? (
-    <p>Book pages coming soon.</p>
-  ) : (
-    <div class="book-grid">
-      {books.map((book) => (
-        <div class="book-card">
-          <h2>
-            <a href={`/books/${book.id.replace(/\.md$/, '')}/`}>{book.data.title}</a>
-          </h2>
-          {book.data.subtitle && <p class="book-subtitle">{book.data.subtitle}</p>}
-          <span class={`status-badge status-${book.data.status}`}>Book {book.data.order} · {readerStatus[book.data.status]}</span>
-          <p>{book.data.synopsis}</p>
+    {echo && (
+      <article class="featured-book">
+        <div class="sunstone-art" aria-hidden="true">
+          <svg viewBox="0 0 220 280" fill="none">
+            <path d="M110 18v38M110 224v38M15 140h38M167 140h38M42 72l28 28M150 180l28 28M178 72l-28 28M70 180l-28 28" stroke="currentColor" stroke-width="2"/>
+            <path d="m110 62 58 44-30 104-72-26-18-88 62-34Z" stroke="currentColor" stroke-width="3"/>
+            <path d="m66 184 44-44-62-44M110 140l28 70M110 62v78" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span>Book One</span>
         </div>
-      ))}
-    </div>
-  )}
-</PageLayout>
+        <div class="featured-copy">
+          <p class="book-meta">Book One · {readerStatus[echo.data.status]}</p>
+          <h2>{echo.data.title}</h2>
+          {echo.data.subtitle && <p class="tagline">{echo.data.subtitle}</p>}
+          <p class="synopsis">{echo.data.synopsis}</p>
+          <div class="book-actions">
+            <a class="btn btn-primary" href="/books/echo-of-the-sunstone/excerpt/">Read Chapter One</a>
+            <a class="btn btn-secondary" href="/books/echo-of-the-sunstone/">Book details</a>
+          </div>
+        </div>
+      </article>
+    )}
+
+    <section class="series-future">
+      <div class="future-heading"><p>The road ahead</p><h2>The trilogy continues.</h2></div>
+      <div class="future-grid">
+        {futureBooks.map((book) => (
+          <a href={`/books/${book.id.replace(/\.md$/, '')}/`} class="future-book">
+            <span>Book {book.data.order} · {readerStatus[book.data.status]}</span>
+            <h3>{book.data.title}</h3>
+            {book.data.subtitle && <p>{book.data.subtitle}</p>}
+            <i aria-hidden="true">→</i>
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
 
 <style>
-  .series-intro {
-    color: var(--text-muted);
-    margin-bottom: 2rem;
-  }
-  .book-grid {
-    display: grid;
-    gap: 2rem;
-  }
-  .book-card {
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 0.5rem;
-  }
-  .book-card h2 {
-    margin-bottom: 0.25rem;
-  }
-  .book-subtitle {
-    color: var(--text-muted);
-    font-style: italic;
-  }
-  .status-badge {
-    display: inline-block;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.2em 0.6em;
-    border-radius: 1em;
-    background: var(--tag-bg);
-    margin: 0.5rem 0;
-  }
+  .books-page { max-width: 70rem; margin: auto; padding: clamp(3rem,7vw,6rem) 1.5rem; }
+  .series-header { max-width: 48rem; margin-bottom: 3rem; }
+  .series-header > p, .book-meta, .future-heading > p { margin: 0 0 .8rem; color: var(--gold); font-family: var(--font-sans); font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+  .series-header h1 { margin: 0; font-size: clamp(2.8rem,6vw,5rem); }
+  .featured-book { display: grid; grid-template-columns: minmax(16rem,.8fr) 1.2fr; border: 1px solid var(--border); background: var(--bg-raised); }
+  .sunstone-art { position: relative; min-height: 34rem; display: grid; place-items: center; overflow: hidden; border-right: 1px solid var(--border); background: radial-gradient(circle at center,rgba(214,182,109,.16),transparent 32%),linear-gradient(145deg,rgba(155,73,52,.13),rgba(214,182,109,.02)); color: var(--gold); }
+  .sunstone-art::before { content: ""; position: absolute; inset: 1rem; border: 1px solid rgba(214,182,109,.16); }
+  .sunstone-art svg { width: min(58%,14rem); filter: drop-shadow(0 0 2rem rgba(214,182,109,.2)); }
+  .sunstone-art span { position: absolute; bottom: 2rem; font-family: var(--font-sans); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; }
+  .featured-copy { padding: clamp(2.5rem,6vw,5rem); display: flex; flex-direction: column; justify-content: center; }
+  .featured-copy h2 { margin: 0; font-size: clamp(2.7rem,5vw,4.5rem); }
+  .tagline { margin: .7rem 0 1.6rem; color: var(--gold-bright); font-size: 1.15rem; font-style: italic; }
+  .synopsis { max-width: 39rem; color: var(--text-muted); line-height: 1.8; }
+  .book-actions { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+  .series-future { margin-top: 4rem; }
+  .future-heading { margin-bottom: 1.5rem; }
+  .future-heading h2 { margin: 0; }
+  .future-grid { display: grid; grid-template-columns: repeat(2,1fr); border: 1px solid var(--border); }
+  .future-book { position: relative; min-height: 14rem; padding: 1.7rem; display: flex; flex-direction: column; justify-content: end; color: var(--text); text-decoration: none; transition: background .2s; }
+  .future-book + .future-book { border-left: 1px solid var(--border); }
+  .future-book:hover { background: var(--tag-bg); color: var(--text); }
+  .future-book > span { margin-bottom: auto; color: var(--gold); font-family: var(--font-sans); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; }
+  .future-book h3 { margin: 0 0 .4rem; font-size: 1.7rem; }
+  .future-book p { margin: 0; color: var(--text-muted); font-size: .86rem; font-style: italic; }
+  .future-book i { position: absolute; right: 1.5rem; bottom: 1.5rem; color: var(--gold); font-style: normal; }
+  @media (max-width:760px) { .featured-book { grid-template-columns: 1fr; } .sunstone-art { min-height: 22rem; border-right: 0; border-bottom: 1px solid var(--border); } .future-grid { grid-template-columns: 1fr; } .future-book + .future-book { border-top: 1px solid var(--border); border-left: 0; } }
 </style>

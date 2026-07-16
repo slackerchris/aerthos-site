@@ -6,7 +6,7 @@ const pageTitle = Astro.props.title ? `${Astro.props.title} — Aerthos` : "Aert
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const navItems = [
   ["/books", "Books"],
-  ["/blog", "Journal"],
+  ["/blog", "Journals"],
   ["/world", "World"],
   ["/about", "About"],
 ];
@@ -29,16 +29,20 @@ const navItems = [
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Map of the world of Aerthos" />
     <meta name="twitter:card" content="summary_large_image" />
+    <link rel="alternate" type="application/rss+xml" title="Journals from Aerthos" href="/rss.xml" />
 
     <title>{pageTitle}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles/global.css" />
   </head>
   <body>
     <header class="site-header">
       <nav class="site-nav">
-        <a href="/" class="logo" aria-label="Aerthos home"><span class="logo-mark" aria-hidden="true"><span>A</span></span>Aerthos</a>
+        <a href="/" class="logo" aria-label="Aerthos home"><span class="logo-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M16 1v6M16 25v6M1 16h6M25 16h6M5.4 5.4l4.2 4.2M22.4 22.4l4.2 4.2M26.6 5.4l-4.2 4.2M9.6 22.4l-4.2 4.2" stroke="currentColor" stroke-width="1.5"/><path d="M16 8 23 13.5 19 24 11 20.5 9 12.5 16 8Z" stroke="currentColor" stroke-width="1.5"/><path d="m11 20.5 5-5-7-3M16 15.5l3 8.5" stroke="currentColor" stroke-width="1.25"/></svg></span>Aerthos</a>
         <ul>
           {navItems.map(([href, label]) => (
             <li><a href={href} aria-current={pathname.startsWith(href) ? "page" : undefined}>{label}</a></li>
@@ -53,10 +57,13 @@ const navItems = [
 
     <footer>
       <div class="footer-content">
-        <p>&copy; {new Date().getFullYear()} Chris. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Chris Eckman <span class="footer-world">· Age of Reclamation · The World of Aerthos</span></p>
         <nav class="footer-nav">
+          <a href="/books">Books</a>
+          <a href="/world">World</a>
+          <a href="/blog">Journals</a>
           <a href="/about">About</a>
-          <a href="/blog">Blog</a>
+          <a href="/rss.xml">RSS</a>
         </nav>
       </div>
     </footer>

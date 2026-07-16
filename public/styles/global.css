@@ -13,6 +13,9 @@
   --parchment: #d7c294;
   --parchment-light: #ead9b4;
   --ink: #292218;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+  --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
   --accent: var(--gold);
   --accent-hover: var(--gold-bright);
   --tag-bg: rgba(214, 182, 109, 0.1);
@@ -33,7 +36,7 @@ body {
     radial-gradient(circle at 90% 20%, rgba(61, 72, 57, 0.14), transparent 34rem),
     var(--bg);
   color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--font-body);
   line-height: 1.72;
 }
 
@@ -54,6 +57,7 @@ h1, h2, h3, h4 {
   font-weight: 500;
   line-height: 1.12;
   text-wrap: balance;
+  font-family: var(--font-display);
 }
 h1 { font-size: clamp(2.6rem, 7vw, 4.8rem); letter-spacing: -0.025em; }
 h2 { margin-top: 2.5rem; font-size: clamp(1.7rem, 4vw, 2.4rem); }
@@ -85,27 +89,26 @@ a:hover { color: var(--accent-hover); }
   gap: .65rem;
   align-items: center;
   color: var(--text);
-  font-size: 1.15rem;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: .18em;
   text-decoration: none;
   text-transform: uppercase;
 }
 .logo-mark {
-  width: 1.65rem;
-  aspect-ratio: 1;
+  width: 2rem;
+  height: 2rem;
   display: grid;
   place-items: center;
-  border: 1px solid var(--gold);
   color: var(--gold);
-  font-size: .85rem;
-  transform: rotate(45deg);
 }
-.logo-mark span { transform: rotate(-45deg); }
+.logo-mark svg { width: 100%; height: 100%; overflow: visible; }
 .site-nav ul { display: flex; gap: clamp(.9rem, 3vw, 2rem); list-style: none; }
 .site-nav li a {
   position: relative;
   color: var(--text-muted);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: .72rem;
   letter-spacing: .16em;
   text-decoration: none;
@@ -122,7 +125,7 @@ footer { margin-top: 5rem; border-top: 1px solid var(--border); background: rgba
   align-items: center;
   justify-content: space-between;
   color: var(--text-muted);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: .72rem;
   letter-spacing: .05em;
 }
@@ -137,7 +140,7 @@ footer { margin-top: 5rem; border-top: 1px solid var(--border); background: rgba
   display: block;
   margin-bottom: 1rem;
   color: var(--gold);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: .68rem;
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -154,7 +157,7 @@ footer { margin-top: 5rem; border-top: 1px solid var(--border); background: rgba
   justify-content: center;
   border: 1px solid transparent;
   border-radius: 0;
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: .7rem;
   font-weight: 700;
   letter-spacing: .12em;
@@ -175,14 +178,14 @@ footer { margin-top: 5rem; border-top: 1px solid var(--border); background: rgba
   border-radius: 2rem;
   background: var(--tag-bg);
   color: var(--gold-bright);
-  font-family: Arial, sans-serif;
+  font-family: var(--font-sans);
   font-size: .62rem;
   letter-spacing: .12em;
   text-transform: uppercase;
 }
 .tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
 .post-header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
-.post-header time, .book-series { color: var(--text-muted); font-family: Arial, sans-serif; font-size: .75rem; letter-spacing: .08em; }
+.post-header time, .book-series { color: var(--text-muted); font-family: var(--font-sans); font-size: .75rem; letter-spacing: .08em; }
 .post-body { line-height: 1.85; }
 .post-body p { margin-bottom: 1.35rem; }
 .journal-note { margin-bottom: 1.75rem; padding: 1rem 1.2rem; border-left: 2px solid var(--gold); color: var(--text-muted); font-style: italic; }
@@ -192,6 +195,8 @@ footer { margin-top: 5rem; border-top: 1px solid var(--border); background: rgba
   .site-nav { min-height: auto; padding: 1rem; flex-direction: column; gap: 1rem; }
   .site-nav ul { width: 100%; justify-content: space-between; gap: .5rem; }
   .footer-content { flex-direction: column; gap: 1rem; text-align: center; }
+  .footer-nav { flex-wrap: wrap; justify-content: center; }
+  .footer-world { display: block; margin-top: .25rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,60 +1,51 @@
 ---
-import PageLayout from "../../layouts/PageLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const posts = await getCollection("blog", ({ data }) => !data.draft);
 posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
-<PageLayout title="Blog" description="Writing updates and lore from the world of Aerthos.">
-  <h1>Blog</h1>
+<BaseLayout title="Journals" description="Character journals and discovered writings from the world of Aerthos.">
+  <div class="journals-page">
+    <header class="journals-header">
+      <p>Discovered writings</p>
+      <h1>Journals from Aerthos</h1>
+      <span>Private words, road-worn accounts, and voices from the Age of Reclamation.</span>
+    </header>
 
-  {posts.length === 0 ? (
-    <p>No posts yet. Check back soon for writing updates and lore deep-dives.</p>
-  ) : (
-    <ul class="post-list">
+    <div class="journal-list">
       {posts.map((post) => (
-        <li class="post-item">
-          <a href={`/blog/${post.id.replace(/\.md$/, '')}/`}>
+        <a href={`/blog/${post.id.replace(/\.md$/, '')}/`} class="journal-entry">
+          <div class="entry-meta">
+            <span>During <em>Echo</em></span>
+            <span>Character journal</span>
+          </div>
+          <div class="entry-copy">
             <h2>{post.data.title}</h2>
             <p>{post.data.description}</p>
-            <time datetime={post.data.date.toISOString()}>
-              {post.data.date.toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-          </a>
-        </li>
+          </div>
+          <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</time>
+          <i aria-hidden="true">→</i>
+        </a>
       ))}
-    </ul>
-  )}
-</PageLayout>
+    </div>
+  </div>
+</BaseLayout>
 
 <style>
-  .post-list {
-    list-style: none;
-    padding: 0;
-  }
-  .post-item {
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--border);
-  }
-  .post-item a {
-    text-decoration: none;
-    color: inherit;
-  }
-  .post-item h2 {
-    margin-bottom: 0.25rem;
-  }
-  .post-item p {
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-  }
-  .post-item time {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-  }
+  .journals-page { max-width: 62rem; margin: auto; padding: clamp(3rem,8vw,7rem) 1.5rem; }
+  .journals-header { max-width: 42rem; margin-bottom: 3rem; }
+  .journals-header > p { margin: 0 0 .8rem; color: var(--gold); font-family: var(--font-sans); font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+  .journals-header h1 { margin: 0 0 1rem; font-size: clamp(3rem,6vw,5rem); }
+  .journals-header > span { color: var(--text-muted); font-style: italic; }
+  .journal-list { border-top: 1px solid var(--border); }
+  .journal-entry { position: relative; padding: 2rem 3.5rem 2rem 0; display: grid; grid-template-columns: 10rem 1fr auto; align-items: center; gap: 2rem; border-bottom: 1px solid var(--border); color: var(--text); text-decoration: none; transition: padding-left .2s,background .2s; }
+  .journal-entry:hover { padding-left: 1rem; background: linear-gradient(to right,var(--tag-bg),transparent); color: var(--text); }
+  .entry-meta { display: flex; flex-direction: column; gap: .35rem; color: var(--gold); font-family: var(--font-sans); font-size: .58rem; letter-spacing: .1em; text-transform: uppercase; }
+  .entry-copy h2 { margin: 0 0 .4rem; font-size: 1.7rem; }
+  .entry-copy p { margin: 0; color: var(--text-muted); font-size: .88rem; }
+  time { color: var(--text-muted); font-family: var(--font-sans); font-size: .62rem; white-space: nowrap; }
+  .journal-entry > i { position: absolute; right: 1rem; color: var(--gold); font-style: normal; }
+  @media (max-width:700px) { .journal-entry { grid-template-columns: 1fr; gap: 1rem; } time { grid-row: 1; } }
 </style>

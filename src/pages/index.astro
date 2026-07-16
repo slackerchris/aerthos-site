@@ -39,7 +39,7 @@ const latestPost = (await getCollection("blog", ({ data }) => !data.draft))
       </a>
       {latestPost && (
         <a href={`/blog/${latestPost.id.replace(/\.md$/, '')}/`}>
-          <span>03 · From the journal</span>
+          <span>03 · From the journals</span>
           <strong>{latestPost.data.title}</strong>
           <i aria-hidden="true">→</i>
         </a>
