@@ -78,7 +78,7 @@
   /* ---------- alphabet grid ---------- */
   .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); gap:clamp(10px,1.4vw,16px)}
   .tile{
-    background:var(--tile); border:1px solid var(--edge); border-radius:3px;
+    background:linear-gradient(145deg,var(--parchment-light),var(--tile)); color:var(--ink); border:1px solid rgba(91,66,32,.32); border-radius:3px;
     padding:18px 14px 14px; display:flex; flex-direction:column; align-items:center; gap:2px;
     position:relative; overflow:hidden;
     transition:transform .5s cubic-bezier(.2,.7,.2,1), opacity .5s ease, border-color .25s, box-shadow .25s;
@@ -89,17 +89,17 @@
   .tile:hover .rune{color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}
   .rune{width:56px; height:88px; color:var(--ink); transition:color .25s, filter .25s}
   .tile.holy .rune{color:var(--accent)}
-  .r-name{font-family:var(--font-display); font-size:1.34rem; letter-spacing:.01em; margin-top:6px}
+  .r-name{font-family:var(--font-display); font-size:1.34rem; letter-spacing:.01em; margin-top:6px; color:var(--ink)}
   .r-letter{
     font-family:var(--font-mono); font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
     color:#6f4226; background:rgba(111,66,38,.1);
     padding:2px 8px; border-radius:2px;
   }
-  .r-sound{font-family:var(--font-mono); font-size:.74rem; color:var(--ink-soft); margin-top:5px}
-  .r-mean{font-size:.82rem; color:var(--muted); text-align:center; line-height:1.4; margin-top:4px; text-wrap:balance}
+  .r-sound{font-family:var(--font-mono); font-size:.74rem; color:#4a3c2b; margin-top:5px}
+  .r-mean{font-size:.82rem; color:#685a43; text-align:center; line-height:1.4; margin-top:4px; text-wrap:balance}
   .holy-tag{
     position:absolute; top:8px; right:8px; font-family:var(--font-mono);
-    font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+    font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color:#754724;
   }
 
   /* ---------- the two sacred marks ---------- */
@@ -107,7 +107,7 @@
   @media (min-width:720px){.marks{grid-template-columns:1fr 1fr}}
   .mark{
     display:flex; gap:clamp(16px,2.4vw,24px); align-items:flex-start;
-    background:var(--tile); border:1px solid var(--edge); border-radius:3px;
+    background:linear-gradient(145deg,var(--parchment-light),var(--tile)); color:var(--ink); border:1px solid rgba(91,66,32,.32); border-radius:3px;
     padding:clamp(18px,2.6vw,26px); box-shadow:inset 0 0 0 1px var(--accent);
   }
   .mark .rune{width:60px; height:96px; flex:none; color:var(--accent); filter:drop-shadow(0 0 8px var(--glow))}

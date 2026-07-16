@@ -2,145 +2,77 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const books = (await getCollection("books")).sort((a, b) => a.data.order - b.data.order);
-const posts = (await getCollection("blog", ({ data }) => !data.draft))
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
-const readerStatus = {
-  beta: "Book One · In Revision",
-  editing: "In Revision",
-  draft: "In Development",
-  published: "Available Now",
-};
+const latestPost = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())[0];
 ---
 
-<BaseLayout title="Epic fantasy from a shattered world" description="Enter Aerthos, an epic fantasy world shattered by the Sundering. Explore the Age of Reclamation books, lore, and character journals.">
-  <section class="hero">
-    <div class="hero-runes" aria-hidden="true">✦</div>
-    <div class="hero-content">
-      <p class="eyebrow">The Age of Reclamation</p>
-      <h1>The world survived.<br /><em>What wakes next?</em></h1>
-      <p class="hero-description">Three thousand years after magic shattered the old world, a thief, a dwarven exile, and an elven weaver uncover a divine relic capable of reshaping reality. Every kingdom wants it. A hidden enemy has been waiting for it.</p>
-      <div class="hero-actions">
-        <a href="/books/echo-of-the-sunstone/" class="btn btn-primary">Discover Book One <span aria-hidden="true">→</span></a>
-        <a href="/world" class="btn btn-secondary">Explore the world</a>
+<BaseLayout title="Epic fantasy from a shattered world" description="Enter Aerthos, an epic fantasy world shattered by the Sundering. Begin the Age of Reclamation with Echo of the Sunstone.">
+  <div class="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Book One · The Age of Reclamation</p>
+        <h1>The world survived the Sundering.</h1>
+        <p class="hook">It may not survive what wakes next.</p>
+        <p class="description">Three thousand years after magic shattered the old world, a thief, a dwarven exile, and an elven weaver recover a divine relic capable of reshaping reality.</p>
+        <div class="actions">
+          <a href="/books/echo-of-the-sunstone/excerpt/" class="btn btn-primary">Read Chapter One</a>
+          <a href="/books/echo-of-the-sunstone/" class="text-link">Meet the fellowship <span aria-hidden="true">→</span></a>
+        </div>
       </div>
-    </div>
-    <p class="scroll-note">Enter Aerthos <span aria-hidden="true">↓</span></p>
-  </section>
 
-  <section class="series-section">
-    <div class="section-heading">
-      <div><p class="eyebrow">The Saga</p><h2>Three books. One fractured world.</h2></div>
-      <a href="/books" class="text-link">View the complete series <span>→</span></a>
-    </div>
-    <div class="book-row">
-      {books.map((book, index) => (
-        <a class="book-card" href={`/books/${book.id.replace(/\.md$/, '')}/`}>
-          <span class="book-number">0{index + 1}</span>
-          <span class="book-status">{readerStatus[book.data.status]}</span>
-          <h3>{book.data.title}</h3>
-          {book.data.subtitle && <p>{book.data.subtitle}</p>}
-          <span class="card-arrow" aria-hidden="true">↗</span>
+      <a class="hero-map" href="/world" aria-label="Explore the world of Aerthos">
+        <img src="/images/aerthos-world-map.webp" alt="Illustrated map of Aerthos" width="2400" height="1800" />
+        <span class="map-label"><small>The known world</small><strong>Explore Aerthos</strong></span>
+      </a>
+    </section>
+
+    <nav class="discovery" aria-label="Discover Aerthos">
+      <a href="/books">
+        <span>01 · The series</span>
+        <strong>Three books. One fractured world.</strong>
+        <i aria-hidden="true">→</i>
+      </a>
+      <a href="/world">
+        <span>02 · The atlas</span>
+        <strong>Kingdoms, ruins, and the Weave.</strong>
+        <i aria-hidden="true">→</i>
+      </a>
+      {latestPost && (
+        <a href={`/blog/${latestPost.id.replace(/\.md$/, '')}/`}>
+          <span>03 · From the journal</span>
+          <strong>{latestPost.data.title}</strong>
+          <i aria-hidden="true">→</i>
         </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="fellowship-section">
-    <div class="section-heading">
-      <div><p class="eyebrow">Meet the fellowship</p><h2>Three lives that were never meant to cross.</h2></div>
-    </div>
-    <div class="character-grid">
-      <article><span>A</span><div><h3>Anya</h3><p>A thief who trusts knives more readily than people.</p></div></article>
-      <article><span>B</span><div><h3>Bjorn</h3><p>An exile carrying an oath heavier than his axe.</p></div></article>
-      <article><span>E</span><div><h3>Elara</h3><p>An elven weaver determined to mend a world her people abandoned.</p></div></article>
-    </div>
-  </section>
-
-  <section class="world-callout">
-    <a class="map-window" href="/world" aria-label="Explore the world map of Aerthos">
-      <img src="/images/aerthos-world-map.webp" alt="A weathered illustrated map of Aerthos" width="2400" height="1800" loading="lazy" />
-      <span>View the map ↗</span>
-    </a>
-    <div>
-      <p class="eyebrow">Beyond the page</p>
-      <h2>Every ruin remembers.</h2>
-      <p>Trace the history of the Sundering. Learn the laws of the Weave. Meet the gods whose absence still shapes every life in Aerthos.</p>
-      <a href="/world" class="text-link">Enter the world atlas <span>→</span></a>
-    </div>
-  </section>
-
-  <section class="journal-section">
-    <div class="section-heading">
-      <div><p class="eyebrow">From the journal</p><h2>Voices from Aerthos</h2></div>
-      <a href="/blog" class="text-link">Read all entries <span>→</span></a>
-    </div>
-    <div class="post-grid">
-      {posts.map((post) => (
-        <a href={`/blog/${post.id.replace(/\.md$/, '')}/`} class="post-card">
-          <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}</time>
-          <h3>{post.data.title}</h3>
-          <p>{post.data.description}</p>
-          <span>Read entry →</span>
-        </a>
-      ))}
-    </div>
-  </section>
-
+      )}
+    </nav>
+  </div>
 </BaseLayout>
 
 <style>
-  .eyebrow { margin: 0 0 1rem; color: var(--gold); font-family: Arial, sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; }
-  .hero { position: relative; min-height: calc(100vh - 4.6rem); padding: 7rem 1.5rem 5rem; display: grid; place-items: center; overflow: hidden; border-bottom: 1px solid var(--border); }
-  .hero::before { content: ""; position: absolute; width: min(72vw, 54rem); aspect-ratio: 1; border: 1px solid rgba(214,182,109,.13); border-radius: 50%; box-shadow: 0 0 0 5rem rgba(214,182,109,.018), 0 0 0 10rem rgba(214,182,109,.012); }
-  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, var(--bg)), linear-gradient(110deg, rgba(155,73,52,.1), transparent 35%); pointer-events: none; }
-  .hero-content { position: relative; z-index: 2; max-width: 56rem; text-align: center; }
-  .hero h1 { margin-bottom: 1.5rem; font-size: clamp(3.3rem, 9vw, 7.3rem); line-height: .95; }
-  .hero h1 em { color: var(--gold-bright); font-weight: 400; }
-  .hero-description { max-width: 43rem; margin: 0 auto 2.2rem; color: #c6c2b8; font-size: clamp(1rem, 2vw, 1.15rem); }
-  .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: .8rem; }
-  .hero-actions .btn-primary { gap: 1rem; }
-  .hero-runes { position: absolute; z-index: 1; color: rgba(214,182,109,.14); font-size: min(34vw, 25rem); line-height: 1; }
-  .scroll-note { position: absolute; z-index: 3; bottom: 1.5rem; margin: 0; color: var(--text-muted); font-family: Arial, sans-serif; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; }
-  .scroll-note span { margin-left: .6rem; color: var(--gold); }
-  .series-section, .journal-section, .fellowship-section { max-width: 76rem; margin: auto; padding: clamp(5rem, 10vw, 8rem) 1.5rem; }
-  .section-heading { margin-bottom: 2.5rem; display: flex; align-items: end; justify-content: space-between; gap: 2rem; }
-  .section-heading h2 { max-width: 32rem; margin: 0; }
-  .text-link { flex-shrink: 0; color: var(--text-muted); font-family: Arial, sans-serif; font-size: .7rem; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
-  .text-link span { margin-left: .55rem; color: var(--gold); }
+  .home { max-width: 76rem; margin: auto; padding: clamp(2rem,5vw,4.5rem) 1.5rem 0; }
+  .hero { min-height: 37rem; display: grid; grid-template-columns: 1.02fr .98fr; align-items: stretch; border: 1px solid var(--border); background: var(--bg-raised); }
+  .hero-copy { padding: clamp(2.5rem,6vw,5.5rem); display: flex; flex-direction: column; justify-content: center; }
+  .eyebrow { margin: 0 0 1.5rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+  .hero h1 { max-width: 10ch; margin: 0; font-size: clamp(3rem,6vw,5.4rem); line-height: .94; }
+  .hook { margin: 1.3rem 0 0; color: var(--gold-bright); font-size: clamp(1.25rem,2.2vw,1.65rem); font-style: italic; }
+  .description { max-width: 34rem; margin: 1.5rem 0 2rem; color: var(--text-muted); font-size: 1rem; }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.4rem; }
+  .text-link { color: var(--text-muted); font-family: Arial,sans-serif; font-size: .67rem; letter-spacing: .09em; text-decoration: none; text-transform: uppercase; }
+  .text-link span { margin-left: .5rem; color: var(--gold); }
   .text-link:hover { color: var(--gold-bright); }
-  .book-row { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-  .book-card { position: relative; min-height: 22rem; padding: 2rem; display: flex; flex-direction: column; color: var(--text); text-decoration: none; transition: background .25s; }
-  .book-card + .book-card { border-left: 1px solid var(--border); }
-  .book-card:hover { background: linear-gradient(145deg, rgba(214,182,109,.11), rgba(214,182,109,.02)); color: var(--text); }
-  .book-number { color: var(--gold); font-size: .8rem; }
-  .book-status { margin: auto 0 .75rem; color: var(--text-muted); font-family: Arial, sans-serif; font-size: .6rem; letter-spacing: .15em; text-transform: uppercase; }
-  .book-card h3 { max-width: 12rem; margin: 0 0 .8rem; font-size: clamp(1.5rem, 3vw, 2.2rem); }
-  .book-card p { max-width: 17rem; margin: 0; color: var(--text-muted); font-size: .85rem; font-style: italic; }
-  .card-arrow { position: absolute; top: 1.6rem; right: 1.6rem; color: var(--text-muted); transition: color .2s, transform .2s; }
-  .book-card:hover .card-arrow { color: var(--gold); transform: translate(3px,-3px); }
-  .fellowship-section { padding-top: 1rem; }
-  .character-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
-  .character-grid article { min-height: 13rem; padding: 1.5rem; display: flex; align-items: end; gap: 1.2rem; border: 1px solid var(--border); background: linear-gradient(145deg, rgba(214,182,109,.045), transparent); }
-  .character-grid article > span { position: relative; width: 3.2rem; aspect-ratio: 1; flex: 0 0 auto; display: grid; place-items: center; color: var(--gold); }
-  .character-grid article > span::before { content: ""; position: absolute; inset: .45rem; border: 1px solid var(--border-strong); transform: rotate(45deg); }
-  .character-grid h3 { margin: 0 0 .5rem; font-size: 1.35rem; }
-  .character-grid p { margin: 0; color: var(--text-muted); font-size: .85rem; }
-  .world-callout { position: relative; max-width: 76rem; margin: 0 auto; padding: clamp(2rem,5vw,4rem); display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: clamp(2rem,6vw,6rem); border: 1px solid var(--border); background: linear-gradient(120deg,rgba(155,73,52,.09),rgba(214,182,109,.035)); overflow: hidden; }
-  .world-callout h2 { margin: 0 0 1rem; }
-  .world-callout > div:last-child > p:not(.eyebrow) { max-width: 35rem; color: var(--text-muted); }
-  .map-window { position: relative; aspect-ratio: 4/3; display: block; overflow: hidden; border: 1px solid var(--border-strong); box-shadow: 0 1.5rem 4rem rgba(0,0,0,.35); color: var(--parchment-light); text-decoration: none; }
-  .map-window::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 3rem rgba(24,15,7,.6); pointer-events: none; }
-  .map-window img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .6s ease; }
-  .map-window span { position: absolute; z-index: 2; right: 1rem; bottom: 1rem; padding: .55rem .8rem; background: rgba(31,25,17,.88); font-family: Arial,sans-serif; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
-  .map-window:hover img { transform: scale(1.025); }
-  .post-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
-  .post-card { min-height: 19rem; padding: 2rem; display: flex; flex-direction: column; background: var(--bg-raised); color: var(--text); text-decoration: none; transition: background .2s; }
-  .post-card:hover { background: var(--surface-soft); color: var(--text); }
-  .post-card time { color: var(--gold); font-family: Arial, sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; }
-  .post-card h3 { margin: 2.5rem 0 .8rem; font-size: 1.4rem; }
-  .post-card p { color: var(--text-muted); font-size: .85rem; }
-  .post-card > span { margin-top: auto; color: var(--gold); font-family: Arial, sans-serif; font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; }
-  @media (max-width: 760px) { .book-row, .post-grid, .character-grid { grid-template-columns: 1fr; } .book-card { min-height: 17rem; } .book-card + .book-card { border-left: 0; border-top: 1px solid var(--border); } .world-callout { margin-inline: 1rem; padding: 1rem 1rem 3rem; grid-template-columns: 1fr; } .section-heading { align-items: start; flex-direction: column; } }
+  .hero-map { position: relative; min-height: 32rem; display: block; overflow: hidden; border-left: 1px solid var(--border); color: var(--text); text-decoration: none; }
+  .hero-map::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top,rgba(20,15,9,.88),transparent 50%),linear-gradient(to right,rgba(16,15,12,.18),transparent 40%); box-shadow: inset 0 0 4rem rgba(20,13,6,.5); }
+  .hero-map img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: 57% center; transition: transform .7s ease; }
+  .hero-map:hover img { transform: scale(1.025); }
+  .map-label { position: absolute; z-index: 2; right: 2rem; bottom: 2rem; left: 2rem; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+  .map-label small { color: var(--gold-bright); font-family: Arial,sans-serif; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; }
+  .map-label strong { font-size: 1.25rem; font-weight: 400; }
+  .discovery { display: grid; grid-template-columns: repeat(3,1fr); border: 1px solid var(--border); border-top: 0; }
+  .discovery a { position: relative; min-height: 9.5rem; padding: 1.5rem 3rem 1.5rem 1.5rem; display: flex; flex-direction: column; justify-content: end; color: var(--text); text-decoration: none; transition: background .2s; }
+  .discovery a + a { border-left: 1px solid var(--border); }
+  .discovery a:hover { background: var(--tag-bg); color: var(--text); }
+  .discovery span { margin-bottom: .7rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .58rem; letter-spacing: .15em; text-transform: uppercase; }
+  .discovery strong { font-size: 1rem; font-weight: 400; line-height: 1.35; }
+  .discovery i { position: absolute; right: 1.4rem; bottom: 1.4rem; color: var(--gold); font-style: normal; }
+  @media (max-width:800px) { .home { padding: 1rem 1rem 0; } .hero { grid-template-columns: 1fr; } .hero-copy { padding: 3.5rem 1.5rem; } .hero-map { min-height: 22rem; border-top: 1px solid var(--border); border-left: 0; } .discovery { grid-template-columns: 1fr; } .discovery a { min-height: 8rem; } .discovery a + a { border-top: 1px solid var(--border); border-left: 0; } }
 </style>

@@ -1,19 +1,57 @@
 ---
-import PageLayout from "../layouts/PageLayout.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<PageLayout title="About" description="About Chris, author and creator of the world of Aerthos.">
-  <h1>About the Author</h1>
-  <div class="about-content">
-    <p class="lead">Chris Eckman is an Ohio-based fantasy writer, software developer, father, and lifelong builder of things.</p>
-    <p>He is the author of the <a href="/books"><strong>Age of Reclamation</strong></a> series, set in the fractured world of Aerthos. His stories combine character-driven storytelling, deep history, dangerous magic, and a stubborn belief that ruin does not have to be the end.</p>
+<BaseLayout title="Chris Eckman" description="Meet Chris Eckman, Ohio-based fantasy writer and author of the Age of Reclamation series.">
+  <div class="about-page">
+    <header class="about-header">
+      <p>About</p>
+      <h1>Chris Eckman</h1>
+      <span>Fantasy writer · Software developer · Builder of things</span>
+    </header>
+
+    <div class="about-layout">
+      <article class="bio">
+        <p class="lead">Chris Eckman is a fantasy writer and business intelligence developer based in Ohio. By day, he designs data systems, solves complicated problems, and occasionally convinces computers to behave. The rest of the time, he builds Aerthos—a world of fractured gods, ancient oaths, dangerous relics, and people trying to repair what history broke.</p>
+
+        <p>He is the author of the <a href="/books"><strong>Age of Reclamation</strong></a> series, beginning with <a href="/books/echo-of-the-sunstone/"><em>Echo of the Sunstone</em></a>. His stories blend the scale and history of epic fantasy with intimate character struggles, lived-in cultures, and magic that always carries a cost. At the heart of his work is a stubborn belief that broken things are not necessarily finished.</p>
+
+        <p>Chris is also a father, lifelong tinkerer, tabletop gamer, 3D-printing enthusiast, and keeper of a homelab containing more elaborately named machines than any reasonable household requires. He is usually writing a chapter, designing a world, building something, or creating an unnecessarily sophisticated solution to a problem that technically had a simpler answer.</p>
+      </article>
+
+      <aside class="author-notes">
+        <p class="notes-label">Away from the page</p>
+        <dl>
+          <div><dt>Based in</dt><dd>Ohio</dd></div>
+          <div><dt>Builds</dt><dd>Data systems, worlds, and occasionally overengineered solutions</dd></div>
+          <div><dt>Plays</dt><dd>Tabletop games</dd></div>
+          <div><dt>Tinkers with</dt><dd>3D printers and a questionably elaborate homelab</dd></div>
+        </dl>
+        <a href="/books/echo-of-the-sunstone/excerpt/">Read Chapter One <span aria-hidden="true">→</span></a>
+      </aside>
+    </div>
   </div>
-  <blockquote>“Ruin is not the end. It is where the work begins.”</blockquote>
-</PageLayout>
+</BaseLayout>
 
 <style>
-  .about-content { max-width: 42rem; }
-  .about-content p { color: #cec9be; line-height: 1.85; }
-  .lead { font-size: 1.2rem; }
-  blockquote { margin: 3rem 0 0; padding: 2rem; border-left: 2px solid var(--gold); background: var(--tag-bg); color: var(--gold-bright); font-size: 1.35rem; font-style: italic; }
+  .about-page { max-width: 68rem; margin: auto; padding: clamp(3rem,7vw,6rem) 1.5rem; }
+  .about-header { margin-bottom: 2.5rem; }
+  .about-header > p { margin: 0 0 .8rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .64rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+  .about-header h1 { margin: 0 0 .7rem; font-size: clamp(2.8rem,6vw,4.8rem); }
+  .about-header > span { color: var(--text-muted); font-style: italic; }
+  .about-layout { display: grid; grid-template-columns: minmax(0,1.55fr) minmax(15rem,.7fr); align-items: start; gap: 1rem; }
+  .bio { padding: clamp(2rem,5vw,4rem); border: 1px solid rgba(91,66,32,.32); background: linear-gradient(145deg,var(--parchment-light),var(--parchment)); color: var(--ink); box-shadow: 0 1.5rem 4rem rgba(0,0,0,.25); }
+  .bio p { color: #493e2e; line-height: 1.85; }
+  .bio .lead { color: var(--ink); font-size: 1.08rem; }
+  .bio a { color: #754724; text-decoration-color: rgba(117,71,36,.4); }
+  .bio a:hover { color: #4d2c18; }
+  .author-notes { padding: 2rem; border: 1px solid var(--border); background: var(--bg-raised); }
+  .notes-label { margin: 0 0 1.5rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .62rem; letter-spacing: .17em; text-transform: uppercase; }
+  dl { margin: 0; }
+  dl div { padding: 1rem 0; border-top: 1px solid var(--border); }
+  dt { margin-bottom: .25rem; color: var(--text-muted); font-family: Arial,sans-serif; font-size: .58rem; letter-spacing: .13em; text-transform: uppercase; }
+  dd { margin: 0; color: #d7d0c2; font-size: .9rem; line-height: 1.5; }
+  .author-notes > a { margin-top: 1.5rem; display: inline-block; color: var(--gold); font-family: Arial,sans-serif; font-size: .64rem; letter-spacing: .1em; text-decoration: none; text-transform: uppercase; }
+  .author-notes > a span { margin-left: .5rem; }
+  @media (max-width:760px) { .about-layout { grid-template-columns: 1fr; } .bio { padding: 2rem 1.5rem; } }
 </style>
