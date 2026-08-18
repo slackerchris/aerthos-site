@@ -23,12 +23,6 @@ The relic should have been another job: enter the ruins, take the stone, collect
 
 Anya, Bjorn, and Elara have survived by trusting their own instincts. Carrying the relic north will require them to trust one another—and to decide what they will sacrifice when the Sunstone begins asking a price.
 
-## The fellowship
-
-- **Anya** — A thief who trusts knives more readily than people.
-- **Bjorn** — A dwarven exile carrying an oath heavier than his axe.
-- **Elara** — An elven weaver determined to mend a world her people abandoned.
-
 ## For readers of
 
 Epic fantasy, found family, ancient magic, layered mysteries, and quests where every victory leaves a mark.

@@ -18,7 +18,13 @@ const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In D
 <BaseLayout title={book.data.title} description={book.data.synopsis}>
   <article class="prose book-page">
     <header class="book-header">
-      <div class="book-emblem" aria-hidden="true"><span>✦</span></div>
+      <div class="book-emblem" aria-hidden="true">
+        <svg viewBox="0 0 220 280" fill="none">
+          <path d="M110 18v38M110 224v38M15 140h38M167 140h38M42 72l28 28M150 180l28 28M178 72l-28 28M70 180l-28 28" stroke="currentColor" stroke-width="2"/>
+          <path d="m110 62 58 44-30 104-72-26-18-88 62-34Z" stroke="currentColor" stroke-width="3"/>
+          <path d="m66 184 44-44-62-44M110 140l28 70M110 62v78" stroke="currentColor" stroke-width="2"/>
+        </svg>
+      </div>
       <div class="book-intro">
         <p class="book-kicker">Book {book.data.order} · {book.data.series}</p>
         <h1>{book.data.title}</h1>
@@ -32,6 +38,29 @@ const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In D
     </header>
 
     <div class="book-body"><Content /></div>
+
+    {book.data.order === 1 && (
+      <section class="fellowship" id="fellowship">
+        <header>
+          <p>The fellowship</p>
+          <h2>Three lives that were never meant to cross.</h2>
+        </header>
+        <div class="portrait-grid">
+          <figure>
+            <img src="/images/characters/anya.webp" alt="Anya, a dark-haired thief in weathered black leathers" width="900" height="1124" loading="lazy" />
+            <figcaption><span>Anya</span><p>A thief who trusts knives more readily than people.</p></figcaption>
+          </figure>
+          <figure>
+            <img src="/images/characters/bjorn.webp" alt="Bjorn, a broad dwarven exile carrying a rune-carved axe" width="900" height="1124" loading="lazy" />
+            <figcaption><span>Bjorn</span><p>An exile carrying an oath heavier than his axe.</p></figcaption>
+          </figure>
+          <figure>
+            <img src="/images/characters/elara.webp" alt="Elara, an elven weaver surrounded by luminous threads of magic" width="900" height="1124" loading="lazy" />
+            <figcaption><span>Elara</span><p>An elven weaver determined to mend a world her people abandoned.</p></figcaption>
+          </figure>
+        </div>
+      </section>
+    )}
 
     {book.data.links && (
       <div class="book-links">
@@ -47,9 +76,8 @@ const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In D
   .book-header { margin-bottom: 4rem; padding-bottom: 4rem; display: grid; grid-template-columns: minmax(13rem,.75fr) 1.25fr; align-items: center; gap: clamp(2rem,7vw,6rem); border-bottom: 1px solid var(--border); }
   .book-header::before { display: none; }
   .book-emblem { aspect-ratio: 3/4; display: grid; place-items: center; border: 1px solid var(--border-strong); background: radial-gradient(circle,rgba(214,182,109,.14),transparent 36%),linear-gradient(145deg,rgba(155,73,52,.13),rgba(214,182,109,.03)); box-shadow: inset 0 0 0 1rem rgba(9,13,12,.45); }
-  .book-emblem span { position: relative; width: 45%; aspect-ratio: 1; display: grid; place-items: center; color: var(--gold-bright); font-size: 2.5rem; }
-  .book-emblem span::before { content: ""; position: absolute; inset: .5rem; border: 1px solid var(--gold); transform: rotate(45deg); }
-  .book-kicker { margin: 0 0 1rem; color: var(--gold); font-family: Arial,sans-serif; font-size: .65rem; letter-spacing: .17em; text-transform: uppercase; }
+  .book-emblem svg { width: min(58%,14rem); color: var(--gold); filter: drop-shadow(0 0 2rem rgba(214,182,109,.2)); }
+  .book-kicker { margin: 0 0 1rem; color: var(--gold); font-family: var(--font-sans); font-size: .65rem; letter-spacing: .17em; text-transform: uppercase; }
   .book-intro h1 { margin-bottom: .7rem; }
   .book-subtitle { color: var(--text-muted); font-size: 1.1rem; font-style: italic; }
   .book-synopsis { margin-top: 1.5rem; color: #cec9be; font-size: 1rem; line-height: 1.8; }
@@ -57,6 +85,18 @@ const readerStatus = { beta: "In Revision", editing: "In Revision", draft: "In D
   .book-body { max-width: 48rem; margin: auto; }
   .book-body :global(h2) { margin-top: 3rem; }
   .book-body :global(li) { margin: .5rem 0; color: #cec9be; }
+  .fellowship { margin-top: 5rem; padding-top: 4rem; border-top: 1px solid var(--border); }
+  .fellowship header { max-width: 38rem; margin-bottom: 2rem; }
+  .fellowship header > p { margin: 0 0 .7rem; color: var(--gold); font-family: var(--font-sans); font-size: .62rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+  .fellowship h2 { margin: 0; font-size: clamp(2.2rem,4vw,3.4rem); }
+  .portrait-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: .8rem; }
+  .portrait-grid figure { position: relative; aspect-ratio: 4/5; overflow: hidden; border: 1px solid var(--border); background: var(--bg-raised); }
+  .portrait-grid figure::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(to top,rgba(12,10,7,.97),transparent); pointer-events: none; }
+  .portrait-grid img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .5s ease; }
+  .portrait-grid figure:hover img { transform: scale(1.02); }
+  .portrait-grid figcaption { position: absolute; z-index: 2; right: 1.3rem; bottom: 1.3rem; left: 1.3rem; }
+  .portrait-grid figcaption span { color: var(--gold-bright); font-family: var(--font-display); font-size: 2rem; }
+  .portrait-grid figcaption p { margin: .2rem 0 0; color: #d0c8b9; font-size: .78rem; line-height: 1.45; }
   .book-links { margin-top: 3rem; display: flex; justify-content: center; gap: 1rem; }
-  @media (max-width:700px) { .book-header { grid-template-columns: 1fr; } .book-emblem { width: min(15rem,70vw); margin: auto; } }
+  @media (max-width:700px) { .book-header { grid-template-columns: 1fr; } .book-emblem { width: min(15rem,70vw); margin: auto; } .portrait-grid { grid-template-columns: 1fr; } .portrait-grid figure { aspect-ratio: 4/4.5; } }
 </style>
